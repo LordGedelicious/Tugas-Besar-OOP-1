@@ -18,9 +18,11 @@ class Table {
             this->roweff = 0;
             this->coleff = 0;
         }
+
         ~Table() {
             delete[] item;
         }
+
         void show(string id) {
             int k = 0;
             for (int i = 0; i < maxrow; i++) {
@@ -40,6 +42,8 @@ class Table {
                 }
             }
         }
+
+        
 };
 
 #endif
