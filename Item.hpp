@@ -13,7 +13,14 @@ class Item {
         string type;
     public:
         Item();
-        Item(string name, string type);
+        Item(int id, string name, string type);
+        int getid() const;
+        string getname();
+        string gettype();
+        virtual int getquantity();
+        virtual void add(int _quantity);
+        virtual bool isFull();
+        virtual bool isEmpty();
 };
 
 #endif

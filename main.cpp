@@ -7,11 +7,25 @@
 #include <fstream>
 using namespace std;
 
+int idxNT(string name, string** item, int row) {
+    bool flag = false;
+    int i = 0;
+    while (i < row && !flag) {
+        if (item[i][1] == name && item[i][3] == "NONTOOL") {
+            flag = true;
+        } else {
+            i++;
+        }
+    }
+    return i;
+}
+
 int main() {
     Table<Item, 3, 9> *inventory = new Table<Item, 3, 9>();
     Table<Item, 3, 3> *craft = new Table<Item, 3, 3>();
+    NonTool *ntool;
     string command, line;
-    int row, i;
+    int row, i, idx;
 
     ifstream file("item.txt");
     row = 0;
@@ -22,7 +36,11 @@ int main() {
         file.close();
     }
 
-    string item[row][4];
+    string** item;
+    item = new string*[row];
+    for (i = 0; i < row; i++) {
+        item[i] = new string[4];
+    }
     string id;
     string name;
     string type;
@@ -56,7 +74,14 @@ int main() {
         } else if (command[0] == 'G') { // GIVE
             if (command[1] == 'I' and command[2] == 'V' and command[3] == 'E') {
                 cin >> command;
-
+                idx = idxNT(command, item, row);
+                if (idx != row) {
+                    cin >> command;
+                    ntool = new NonTool(stoi(item[idx][0]), item[idx][1], item[idx][2], stoi(command));
+                    inventory->give(ntool);
+                } else {
+                    cout << "Item tidak valid" << endl;
+                }
             } else {
                 cout << "Command tidak valid" << endl;
             }
