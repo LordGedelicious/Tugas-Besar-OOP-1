@@ -1,11 +1,12 @@
 #include "Item.hpp"
+#include <iostream>
 
-Item::Item() : id(0) {
-    this->name = "";
-    this->type = "";
-}
+using namespace std;
 
-Item::Item(string name, string type) : id(0) {
+int idItem = 0;
+
+Item::Item(string name, string type) : id(idItem + 1) {
     this->name = name;
     this->type = type;
+    idItem ++;
 }
