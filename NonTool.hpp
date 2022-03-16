@@ -17,9 +17,10 @@ class NonTool : public Item {
         int getID() const;
         string getName() const;
         void setName(string newName);
-        // Getter dan Setter buat Type dibuat Pure Abstract Class soalnya dia dependen ke childnya
         string getType() const;
         void setType(string newType);
+        int getQuantity() const;
+        void setQuantity(int newQuantity);
         // Print Status of NonTool
         void printStatus() const;
 };

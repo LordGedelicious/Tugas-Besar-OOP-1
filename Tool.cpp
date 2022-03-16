@@ -2,8 +2,10 @@
 
 Tool::Tool(string name, int durability) : Item(name, "Tool") {
     this->durability = durability;
+    cout << "Created a Tool with name " << name << " and durability " << durability << endl;
 }
 
+// Belum buat error exception kalau durability lebih dari 10
 Tool operator+(int addedDurability, const Tool& other) {
     Tool result = other;
     result.durability += addedDurability;

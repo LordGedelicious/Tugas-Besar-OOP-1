@@ -2,8 +2,10 @@
 
 NonTool::NonTool(string name, int quantity) : Item(name, "NonTool") {
     this->quantity = quantity;
+    cout << "Created a NonTool with name " << name << " and quantity " << quantity << endl;
 }
 
+// Belum dibuat error exception kalau lebih dari 64
 NonTool operator+ (int addedQuantity, const NonTool& other) {
     NonTool result = other;
     result.quantity += addedQuantity;
