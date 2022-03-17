@@ -14,11 +14,11 @@ int Item::getid() const {
     return this->id;
 }
 
-string Item::getname() {
+string Item::getname() const{
     return this->name;
 }
 
-string Item::gettype() {
+string Item::gettype() const{
     return this->type;
 }
 

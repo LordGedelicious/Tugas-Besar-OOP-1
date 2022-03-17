@@ -15,8 +15,8 @@ class Item {
         Item();
         Item(int id, string name, string type);
         int getid() const;
-        string getname();
-        string gettype();
+        string getname() const;
+        string gettype() const;
         virtual int getquantity();
         virtual void add(int _quantity);
         virtual bool isFull();
