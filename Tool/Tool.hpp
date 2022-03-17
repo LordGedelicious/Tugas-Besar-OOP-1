@@ -8,7 +8,8 @@ class Tool : public Item {
         int durability;
     public:
         Tool();
-        Tool(string name, string type, int durability);
+        Tool(int id,string name, string type, int durability);
+        void printDetail() const;
 };
 
 #endif
