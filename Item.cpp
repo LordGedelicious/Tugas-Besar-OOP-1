@@ -28,6 +28,10 @@ int Item::getquantity() {
     return 0;
 }
 
+int Item::getdurability() {
+    return 0;
+}
+
 void Item::add(int _quantity) {
     //
 }

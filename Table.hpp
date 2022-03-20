@@ -52,7 +52,12 @@ class Table {
                         }
                         cout << k;
                     } else {
-                        cout << this->item[i][j]->getname() << " " << this->item[i][j]->getquantity();
+                        cout << this->item[i][j]->getname() << " ";
+                        if (this->item[i][j]->isTool()) {
+                            cout << this->item[i][j]->getdurability();
+                        } else {
+                            cout << this->item[i][j]->getquantity();
+                        }
                     }
                     cout << "]";
 
@@ -112,18 +117,6 @@ class Table {
                 }
             }
             delete nt;
-        }
-
-        void give(Tool *t) {
-            int i,j;
-            for (i=0; i<maxrow; i++) {
-                for (j=0; j<maxrow; j++) {
-                    if (this->item[i][j]->isEmpty()) {
-                        break;
-                    }
-                }
-            }
-            this->item[i][j] = new Tool(*t);
         }
 
         void discard(int id, int count) {

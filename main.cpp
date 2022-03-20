@@ -63,12 +63,6 @@ int main() {
         file.close();
     }
 
-    
-    // TEST FOR DEBUG
-    Tool *tempTool = new Tool(15, "DIAMOND_PICKAXE", "-", 10);
-    inventory->give(tempTool);
-    // END
-
     while(true) {
         cin >> command;
         if (command == "SHOW") { // SHOW

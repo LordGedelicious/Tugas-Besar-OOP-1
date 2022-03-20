@@ -8,6 +8,10 @@ Tool::Tool(int id, string name, string type, int durability) : Item(id, name, ty
     this->durability = durability;
 }
 
+int Tool::getdurability() {
+    return this->durability;
+}
+
 bool Tool::isEmpty() {
     return (this->durability == 0); 
 }

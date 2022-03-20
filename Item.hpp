@@ -19,6 +19,7 @@ class Item {
         string getname() const;
         string gettype() const;
         virtual int getquantity();
+        virtual int getdurability();
         virtual void add(int _quantity);
         virtual void substract(int _quantity);
         virtual bool isFull();
