@@ -30,6 +30,10 @@ void Item::add(int _quantity) {
     //
 }
 
+void Item::substract(int _quantity) {
+    //
+}
+
 bool Item::isFull() {
     return true;
 }

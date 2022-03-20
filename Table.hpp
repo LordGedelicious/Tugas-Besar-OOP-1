@@ -4,17 +4,17 @@
 #ifndef _TABLE_HPP_
 #define _TABLE_HPP_
 
-template <class T, int maxrow, int maxcol>
+template <int maxrow, int maxcol>
 class Table {
     private:
-        T*** item;
+        Item*** item;
     public:
         Table() {
-            this->item = new T**[maxrow];
+            this->item = new Item**[maxrow];
             for (int i = 0; i < maxrow; i++) {
-                this->item[i] = new T*[maxcol];
+                this->item[i] = new Item*[maxcol];
                 for (int j = 0; j < maxcol; j++) {
-                    this->item[i][j] = new T();
+                    this->item[i][j] = new NonTool();
                 }
             }
         }
@@ -108,6 +108,37 @@ class Table {
                     } else {
                         nt->substract(nt->getquantity());
                     }
+                }
+            }
+            delete nt;
+        }
+
+        void discard(int id, int count) {
+            int k = 0;
+            int i = 0;
+            int j = 0;
+            while (i < maxrow && k != id) {
+                j = 0;
+                while (j < maxcol && k != id) {
+                    k++;
+                }
+                
+                if (k != id) {
+                    i++;
+                }
+            }
+
+            if (this->item[i][j]->isEmpty()) {
+                // throw error
+            } else {
+                if (this->item[i][j]->getquantity() >= count) {
+                    this->item[i][j]->substract(count);
+                    if (this->item[i][j]->isEmpty()) {
+                        delete this->item[i][j];
+                        this->item[i][j] = new NonTool();
+                    }
+                } else {
+                    // throw error
                 }
             }
         }

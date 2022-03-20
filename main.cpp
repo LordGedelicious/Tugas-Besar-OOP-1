@@ -5,6 +5,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <sstream>
 using namespace std;
 
 int idxNT(string name, string** item, int row) {
@@ -21,11 +22,12 @@ int idxNT(string name, string** item, int row) {
 }
 
 int main() {
-    Table<Item, 3, 9> *inventory = new Table<Item, 3, 9>();
-    Table<Item, 3, 3> *craft = new Table<Item, 3, 3>();
+    Table<3, 9> *inventory = new Table<3, 9>();
+    Table<3, 3> *craft = new Table<3, 3>();
     NonTool *ntool;
-    string command, line;
+    string command, line, idInventory;
     int row, i, idx;
+    stringstream ss;
 
     ifstream file("item.txt");
     row = 0;
@@ -61,31 +63,34 @@ int main() {
 
     while(true) {
         cin >> command;
-        if (command[0] == 'S') { // SHOW
-            if (command.length() == 4) {
-                if (command[1] == 'H' and command[2] == 'O' and command[3] == 'W') {
-                    craft->show("C");
-                    cout << endl;
-                    inventory->show("I");
-                }
-            } else {
-                cout << "Command tidak valid" << endl;
-            }
-        } else if (command[0] == 'G') { // GIVE
-            if (command[1] == 'I' and command[2] == 'V' and command[3] == 'E') {
+        if (command == "SHOW") { // SHOW
+            craft->show("C");
+            cout << endl;
+            inventory->show("I");
+        } else if (command == "GIVE") { // GIVE
+            cin >> command;
+            idx = idxNT(command, item, row);
+            if (idx != row) {
                 cin >> command;
-                idx = idxNT(command, item, row);
-                if (idx != row) {
-                    cin >> command;
-                    ntool = new NonTool(stoi(item[idx][0]), item[idx][1], item[idx][2], stoi(command));
-                    inventory->give(ntool);
-                } else {
-                    cout << "Item tidak valid" << endl;
-                }
+                ntool = new NonTool(stoi(item[idx][0]), item[idx][1], item[idx][2], stoi(command));
+                inventory->give(ntool);
             } else {
-                cout << "Command tidak valid" << endl;
+                cout << "Item tidak valid" << endl;
             }
-        } else if (command[0] == 'D') { // DISCARD
+        } else if (command == "DISCARD") { // DISCARD
+            cin >> command;
+            if (command[0] == 'I') {
+                ss << command[1];
+                if (command.length() == 3) {
+                    ss << command[2];
+                }
+                idInventory = ss.str();
+                ss.str("");
+                cin >> command;
+                inventory->discard(stoi(idInventory), stoi(command));
+            } else {
+                cout << "ID tidak valid" << endl;
+            }
 
         } else if (command[0] == 'M') { // MOVE
 

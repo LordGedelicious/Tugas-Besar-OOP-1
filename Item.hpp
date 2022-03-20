@@ -19,6 +19,7 @@ class Item {
         string gettype() const;
         virtual int getquantity();
         virtual void add(int _quantity);
+        virtual void substract(int _quantity);
         virtual bool isFull();
         virtual bool isEmpty();
 };
