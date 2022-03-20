@@ -114,17 +114,17 @@ class Table {
             delete nt;
         }
 
-        // void give(Tool *t) {
-        //     int i,j;
-        //     for (i=0; i<maxrow; i++) {
-        //         for (j=0; j<maxrow; j++) {
-        //             if (this->item[i][j]->isEmpty()) {
-        //                 break;
-        //             }
-        //         }
-        //     }
-        //     item[i][j] = t;
-        // }
+        void give(Tool *t) {
+            int i,j;
+            for (i=0; i<maxrow; i++) {
+                for (j=0; j<maxrow; j++) {
+                    if (this->item[i][j]->isEmpty()) {
+                        break;
+                    }
+                }
+            }
+            this->item[i][j] = new Tool(*t);
+        }
 
         void discard(int id, int count) {
             int k = 0;
