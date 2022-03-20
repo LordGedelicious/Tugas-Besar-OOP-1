@@ -1,5 +1,6 @@
 #include "Item.hpp"
 #include "NonTool.hpp"
+#include "Tool.hpp"
 
 #ifndef _TABLE_HPP_
 #define _TABLE_HPP_
@@ -113,6 +114,18 @@ class Table {
             delete nt;
         }
 
+        // void give(Tool *t) {
+        //     int i,j;
+        //     for (i=0; i<maxrow; i++) {
+        //         for (j=0; j<maxrow; j++) {
+        //             if (this->item[i][j]->isEmpty()) {
+        //                 break;
+        //             }
+        //         }
+        //     }
+        //     item[i][j] = t;
+        // }
+
         void discard(int id, int count) {
             int k = 0;
             int i = 0;
@@ -141,6 +154,39 @@ class Table {
                     // throw error
                 }
             }
+        }
+
+        void useTool(int slotID) {
+            int k = 0;
+            int i = 0;
+            int j = 0;
+            while (i < maxrow && k != slotID) {
+                j = 0;
+                while (j < maxcol && k != slotID) {
+                    k++;
+                }
+                
+                if (k != slotID) {
+                    i++;
+                }
+            }
+
+            // IF FOUND
+            if (this->item[i][j]->isTool()) {
+                Tool *t = (Tool *) this->item[i][j];
+                t->use();
+                if (t->isDestroyed()) {
+                    delete this->item[i][j];
+                    this->item[i][j] = new Item();
+                }
+                
+
+
+            }
+            else {
+                //throw exception not a tool
+            }
+            
         }
 };
 

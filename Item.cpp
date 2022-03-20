@@ -3,11 +3,13 @@
 Item::Item() : id(0) {
     this->name = "";
     this->type = "";
+    this->category = '-';
 }
 
-Item::Item(int id, string name, string type) : id(id) {
+Item::Item(int id, string name, string type, char cat) : id(id) {
     this->name = name;
     this->type = type;
+    this->category = cat;
 }
 
 int Item::getid() const {
@@ -40,4 +42,11 @@ bool Item::isFull() {
 
 bool Item::isEmpty() {
     return true;
+}
+
+bool Item::isTool() {
+    return this->category == 'T';
+}
+bool Item::isNonTool() {
+    return this->category == 'N';
 }

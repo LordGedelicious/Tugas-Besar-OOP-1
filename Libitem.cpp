@@ -8,11 +8,11 @@ libitem::libitem() {
 }
 void libitem::addItem(int ID, string name, string type, string category) {
     if (category.compare("tool") == 0) {
-        Item newitem(ID, name, type);
+        Item newitem(ID, name, type, 'T');
         tools.push_back(newitem);
     }
     else if (category.compare("nontool") == 0) {
-        Item newitem(ID, name, type);
+        Item newitem(ID, name, type, 'N');
         nontools.push_back(newitem);
     }
 }

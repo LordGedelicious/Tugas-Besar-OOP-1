@@ -48,6 +48,8 @@ int main() {
     string type;
     string tool_type;
 
+
+
     file.open("item.txt");
     i = 0;
     if (file.is_open()) {
@@ -60,6 +62,12 @@ int main() {
         }
         file.close();
     }
+
+    
+    // TEST FOR DEBUG
+    Tool *tempTool = new Tool(15, "DIAMOND_PICKAXE", "-", 10);
+    inventory->give(tempTool);
+    // END
 
     while(true) {
         cin >> command;
