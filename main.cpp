@@ -2,6 +2,7 @@
 #include "Table.hpp"
 #include "Tool.hpp"
 #include "NonTool.hpp"
+#include "command.hpp"
 #include <iostream>
 #include <string>
 #include <fstream>
@@ -66,42 +67,19 @@ int main() {
     while(true) {
         cin >> command;
         if (command == "SHOW") { // SHOW
-            craft->show("C");
-            cout << endl;
-            inventory->show("I");
+            Show();
         } else if (command == "GIVE") { // GIVE
-            cin >> command;
-            idx = idxNT(command, item, row);
-            if (idx != row) {
-                cin >> command;
-                ntool = new NonTool(stoi(item[idx][0]), item[idx][1], item[idx][2], stoi(command));
-                inventory->give(ntool);
-            } else {
-                cout << "Item tidak valid" << endl;
-            }
+            Give();
         } else if (command == "DISCARD") { // DISCARD
-            cin >> command;
-            if (command[0] == 'I') {
-                ss << command[1];
-                if (command.length() == 3) {
-                    ss << command[2];
-                }
-                idInventory = ss.str();
-                ss.str("");
-                cin >> command;
-                inventory->discard(stoi(idInventory), stoi(command));
-            } else {
-                cout << "ID tidak valid" << endl;
-            }
-
-        } else if (command[0] == 'M') { // MOVE
-
-        } else if (command[0] == 'U') { // USE
-        
-        } else if (command[0] == 'C') { // CRAFT
-        
-        } else if (command[0] == 'E') { // EXPORT
-        
+            Discard();
+        } else if (command == "MOVE") { // MOVE
+            Move();
+        } else if (command == "USE") { // USE
+            Use();
+        } else if (command == "CRAFT") { // CRAFT
+            Craft();
+        } else if (command == "EXPORT") { // EXPORT
+            Export();
         } else {
             cout << "Command tidak valid" << endl;
         }
