@@ -1,15 +1,21 @@
 #include <iostream>
 #include <string>
+#include "Table.hpp"
 #include "Command.hpp"
 using namespace std;
 
 int main(){
-    string command;
+    int slotID;
+    string command, fileName, InvID;
+    Table <3,3> *crafting = new Table<3,3>();
+    Table <3,9> *inventory = new Table<3,9>();
+
+    cout << "Uji coba" << endl;
     while (true){
         cin >> command;
-        if (command == "SHOW"){
-            Show show;
-            show.Execute();
+        if (command == "SHOW"){ //done
+            crafting->show("C");
+            inventory->show("I");
         }
         else if (command == "GIVE"){
             Give give("name", 7);
@@ -22,17 +28,19 @@ int main(){
         else if (command == "MOVE"){
             cout << "placeholder" << endl;
         }
-        else if (command == "USE"){
-            Use use("adsf");
-            use.Execute();
+        else if (command == "USE"){//add exception handling
+            cin >> InvID;
+            Use use(InvID);
+            use.Execute(inventory);
         }
         else if (command == "CRAFT"){
             Craft craft;
             craft.Execute();
         }
-        else if (command == "EXPORT"){
-            Export exp("test");
-            exp.Execute();
+        else if (command == "EXPORT"){ //done
+            cin >> fileName;
+            Export exp(fileName);
+            exp.Execute(inventory);
         }
         else if (command == "EXIT"){
             break;
