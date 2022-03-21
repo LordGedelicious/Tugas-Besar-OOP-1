@@ -7,11 +7,11 @@ libitem::libitem() {
     
 }
 void libitem::addItem(int ID, string name, string type, string category) {
-    if (category.compare("tool") == 0) {
+    if (category.compare("TOOL") == 0) {
         Item newitem(ID, name, type, 'T');
         tools.push_back(newitem);
     }
-    else if (category.compare("nontool") == 0) {
+    else if (category.compare("NONTOOL") == 0) {
         Item newitem(ID, name, type, 'N');
         nontools.push_back(newitem);
     }
@@ -65,6 +65,18 @@ Item libitem::searchtoolsbyid(int id) const{
     throw "not found";
 }
 
+void libitem::readFile(string fileName){
+    int id;
+    string name;
+    string type;
+    string category;
+    ifstream file(fileName);
+    if (file.is_open()){
+        while(file >> id >> name >> type >> category){ //baca tiap line
+            this->addItem(id, name, type, category);
+        }
+    }
+}
 
 int main() {
     libitem li;
