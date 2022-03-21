@@ -1,9 +1,5 @@
 #include "Command.hpp"
 
-//Command
-Command::Command(){
-}
-
 //Show
 Show::Show(){
 }
