@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Item.hpp"
 #include <vector>
+#include <fstream>
 
 #ifndef LIBITEM_HPP_
 #define LIBITEM_HPP_
