@@ -4,7 +4,7 @@ NonTool::NonTool() : Item(), maxquantity(64) {
     this->quantity = 0;
 }
 
-NonTool::NonTool(int id, string name, string type, int quantity) : Item(id, name, type), maxquantity(64) {
+NonTool::NonTool(int id, string name, string type, int quantity) : Item(id, name, type, 'N'), maxquantity(64) {
     this->quantity = quantity;
 }
 

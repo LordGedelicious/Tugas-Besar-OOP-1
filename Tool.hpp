@@ -9,7 +9,10 @@ class Tool : public Item {
     public:
         Tool();
         Tool(int id, string name, string type, int durability);
+        int getdurability();
         bool isEmpty();
+        void use();
+        bool isDestroyed();
 };
 
 #endif

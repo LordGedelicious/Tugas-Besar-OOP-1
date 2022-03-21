@@ -1,20 +1,22 @@
 #include "Item.hpp"
 #include "NonTool.hpp"
+#include "Tool.hpp"
+#include <math.h>
 
 #ifndef _TABLE_HPP_
 #define _TABLE_HPP_
 
-template <class T, int maxrow, int maxcol>
+template <int maxrow, int maxcol>
 class Table {
     private:
-        T*** item;
+        Item*** item;
     public:
         Table() {
-            this->item = new T**[maxrow];
+            this->item = new Item**[maxrow];
             for (int i = 0; i < maxrow; i++) {
-                this->item[i] = new T*[maxcol];
+                this->item[i] = new Item*[maxcol];
                 for (int j = 0; j < maxcol; j++) {
-                    this->item[i][j] = new T();
+                    this->item[i][j] = new NonTool();
                 }
             }
         }
@@ -51,7 +53,12 @@ class Table {
                         }
                         cout << k;
                     } else {
-                        cout << this->item[i][j]->getname() << " " << this->item[i][j]->getquantity();
+                        cout << this->item[i][j]->getname() << " ";
+                        if (this->item[i][j]->isTool()) {
+                            cout << this->item[i][j]->getdurability();
+                        } else {
+                            cout << this->item[i][j]->getquantity();
+                        }
                     }
                     cout << "]";
 
@@ -109,6 +116,116 @@ class Table {
                         nt->substract(nt->getquantity());
                     }
                 }
+            }
+            delete nt;
+        }
+
+        void discard(int id, int count) {
+            int k = 0;
+            int i = 0;
+            int j = 0;
+            while (i < maxrow && k != id) {
+                j = 0;
+                while (j < maxcol && k != id) {
+                    k++;
+                }
+                
+                if (k != id) {
+                    i++;
+                }
+            }
+
+            if (this->item[i][j]->isEmpty()) {
+                // throw error
+            } else {
+                if (this->item[i][j]->getquantity() >= count) {
+                    this->item[i][j]->substract(count);
+                    if (this->item[i][j]->isEmpty()) {
+                        delete this->item[i][j];
+                        this->item[i][j] = new NonTool();
+                    }
+                } else {
+                    // throw error
+                }
+            }
+        }
+
+        void useTool(int slotID) // COMMAND 7
+        {
+            int k = 0;
+            int i = 0;
+            int j = 0;
+            while (i < maxrow && k != slotID) {
+                j = 0;
+                while (j < maxcol && k != slotID) {
+                    k++;
+                }
+                
+                if (k != slotID) {
+                    i++;
+                }
+            }
+
+            // IF FOUND
+            if (this->item[i][j]->isTool()) {
+                Tool *t = (Tool *) this->item[i][j];
+                t->use();
+                if (t->isDestroyed()) {
+                    delete this->item[i][j];
+                    this->item[i][j] = new NonTool(); //NT or Item
+                }
+                
+
+
+            }
+            else {
+                //throw exception not a tool
+            }
+            
+        }
+
+        void stackNonTool(int sID1, int sID2)  // COMMAND 5
+        {
+            bool flag1 = false;
+            bool flag2 = false;
+            int i = 0;
+            int j = 0;
+            int k = 0;
+            int i1, j1, i2, j2;
+
+            while (i < maxrow && (!flag1 || !flag2)) {
+                j = 0;
+                while (j < maxrow && (!flag1 || !flag2)) {
+                    if (sID1 == k) {
+                        flag1 = true;
+                        i1 = i;
+                        j1 = j;
+                    }
+                    if (sID2 == k) {
+                        flag2 = true;
+                        i2 = i;
+                        j2 = j;
+                    }
+                    k++;
+                }
+            }
+
+            if (item[i1][j1]->getid() == item[i2][j2]->getid()) {
+                if (item[i1][i2]->isNonTool()) {
+                    int q1 = item[i1][j1]->getquantity();
+                    int q2 = item[i2][j2]->getquantity();
+                    int moveq = max((64-q2), q1);
+                    item[i1][j1]->substract(moveq);
+                    item[i2][j2]->add(moveq);
+
+                }
+                else {
+                    //exception not a nontool
+                }
+
+            }
+            else {
+                //exception tidak sama item
             }
         }
 };

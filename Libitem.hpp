@@ -3,6 +3,7 @@
 #include "Tool.hpp"
 #include "NonTool.hpp"
 #include <vector>
+#include <fstream>
 
 #ifndef LIBITEM_HPP_
 #define LIBITEM_HPP_
@@ -21,6 +22,7 @@ class libitem {
     Tool searchtoolsbyname(string name) const;
     Tool searchtoolsbyid(int id) const;
     void printlibitem();
+    void readFile(string fileName);
 };
 
 #endif
