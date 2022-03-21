@@ -1,5 +1,7 @@
 #include <iostream>
 #include "Item.hpp"
+#include "Tool.hpp"
+#include "NonTool.hpp"
 #include <vector>
 
 #ifndef LIBITEM_HPP_
@@ -14,10 +16,10 @@ class libitem {
     public:
     libitem();
     void addItem(int ID, string name, string type, string category);
-    Item searchnontoolsbyname(string name) const;
-    Item searchnontoolsbyid(int id) const;
-    Item searchtoolsbyname(string name) const;
-    Item searchtoolsbyid(int id) const;
+    NonTool searchnontoolsbyname(string name) const;
+    NonTool searchnontoolsbyid(int id) const;
+    Tool searchtoolsbyname(string name) const;
+    Tool searchtoolsbyid(int id) const;
     void printlibitem();
 };
 

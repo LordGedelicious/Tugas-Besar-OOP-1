@@ -29,37 +29,41 @@ void libitem::printlibitem() {
     }
 }
 
-Item libitem::searchnontoolsbyname(string name) const{
+NonTool libitem::searchnontoolsbyname(string name) const{
     for (auto i = nontools.begin(); i < nontools.end(); i++){
         if (i->getname() == name) {
-            return *i;
+            NonTool nt(i->getid(),i->getname(),i->gettype(), 0);
+            return nt;
         }
     }
     throw "not found";
 }
 
-Item libitem::searchnontoolsbyid(int id) const{
+NonTool libitem::searchnontoolsbyid(int id) const{
     for (auto i = nontools.begin(); i < nontools.end(); i++){
         if (i->getid() == id) {
-            return *i;
+            NonTool nt(i->getid(),i->getname(),i->gettype(), 0);
+            return nt;
         }
     }
     throw "not found";
 }
 
-Item libitem::searchtoolsbyname(string name) const{
+Tool libitem::searchtoolsbyname(string name) const{
     for (auto i = tools.begin(); i < tools.end(); i++){
         if (i->getname() == name) {
-            return *i;
+            Tool t(i->getid(),i->getname(),i->gettype(), 10);
+            return t;
         }
     }
     throw "not found";
 }
 
-Item libitem::searchtoolsbyid(int id) const{
+Tool libitem::searchtoolsbyid(int id) const{
     for (auto i = tools.begin(); i < tools.end(); i++){
         if (i->getid() == id) {
-            return *i;
+            Tool t(i->getid(),i->getname(),i->gettype(), 10);
+            return t;
         }
     }
     throw "not found";
@@ -73,7 +77,7 @@ int main() {
     li.addItem(3,"wooden_sword", "-", "tool");
     li.printlibitem();
     string search = "wood";
-    Item i = li.searchnontoolsbyname(search);
+    NonTool i = li.searchnontoolsbyname(search);
     cout << i.getname();
     return 0;
 }
