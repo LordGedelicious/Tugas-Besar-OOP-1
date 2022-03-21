@@ -5,19 +5,13 @@
 #include <string>
 using namespace std;
 
-class Command{
-public:
-    Command();
-    virtual void Execute() = 0;
-};
-
-class Show : public Command{
+class Show{
 public:
     Show();
     void Execute();
 };
 
-class Give : public Command{
+class Give{
 private:
     int qty;
     string name;
@@ -26,7 +20,7 @@ public:
     void Execute();
 };
 
-class Discard : public Command{
+class Discard{
 private:
     int qty;
     string InvId;
@@ -35,7 +29,7 @@ public:
     void Execute();
 };
 
-class Move : public Command{
+class Move{
 private:
     string src;
     int N;
@@ -45,7 +39,7 @@ public:
     void Execute();
 };
 
-class Use : public Command{
+class Use{
 private:
     string InvId;
 public:
@@ -53,13 +47,13 @@ public:
     void Execute();
 };
 
-class Craft : public Command{
+class Craft{
 public:
     Craft();
     void Execute();
 };
 
-class Export : public Command{
+class Export{
 private:
     string fileName;
 public:
