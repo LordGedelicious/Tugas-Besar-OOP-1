@@ -19,6 +19,7 @@ class libitem {
     Item searchtoolsbyname(string name) const;
     Item searchtoolsbyid(int id) const;
     void printlibitem();
+    void readFile(string fileName);
 };
 
 #endif
