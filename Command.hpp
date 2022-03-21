@@ -2,14 +2,11 @@
 #define _COMMAND_HPP_
 
 #include <iostream>
+#include <fstream>
 #include <string>
+#include <regex>
+#include "Table.hpp"
 using namespace std;
-
-class Show{
-public:
-    Show();
-    void Execute();
-};
 
 class Give{
 private:
@@ -20,7 +17,7 @@ public:
     void Execute();
 };
 
-class Discard{
+class Discard {
 private:
     int qty;
     string InvId;
@@ -29,7 +26,7 @@ public:
     void Execute();
 };
 
-class Move{
+class Move {
 private:
     string src;
     int N;
@@ -39,26 +36,28 @@ public:
     void Execute();
 };
 
-class Use{
+class Use {
 private:
-    string InvId;
+    string InvID;
 public:
     Use(string InvID);
-    void Execute();
+    void Execute(Table<3,9>* inventory);
 };
 
-class Craft{
+class Craft {
 public:
     Craft();
     void Execute();
 };
 
-class Export{
+class Export {
 private:
     string fileName;
+    Table<3,9> inventory;
 public:
     Export(string fileName);
-    void Execute();
+    bool checkFilename();
+    void Execute(Table<3,9>* inventory);
 };
 
 #endif
