@@ -44,6 +44,7 @@ int main(){
             }
             Move move(src,N,dest);
             move.Execute(inventory);
+            dest.clear();
         }
         else if (command == "USE"){//add exception handling
             cin >> InvID;
