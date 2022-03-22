@@ -128,6 +128,7 @@ class Table {
             while (i < maxrow && k != id) {
                 j = 0;
                 while (j < maxcol && k != id) {
+                    j++;
                     k++;
                 }
                 
