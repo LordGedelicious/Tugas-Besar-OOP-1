@@ -15,9 +15,9 @@
 
 class RecipeList : public Recipe {
     private:
-        Recipe *RecipeList;
+        Recipe *List;
         int currentSize;
-        static int maxSize = 100;
+        const int maxSize = 100;
     public:
         // default constructor, isinya 0
         RecipeList();

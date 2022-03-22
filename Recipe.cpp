@@ -3,8 +3,12 @@
 using namespace std;
 
 Recipe::Recipe() {
-    this->RecipeContents = new ItemDetails[3][3]; // soalnya cuma bisa keisi sama 9 item doang, dalam bentuk 3x3
-    this->RecipeResult = NULL;
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            this->RecipeContents[i][j] = new Item();
+        }
+    }
+    this->RecipeResult = "";
     this->isRecipeFull = false;
     this->isRecipeRowFull = false;
     this->isRecipeColumnFull = false;
@@ -30,7 +34,7 @@ void Recipe::updateRecipeRowFull() {
         for (int i = 0; i <= 3; i++) {
             countExist = 0;
             for (int j = 0; j <= 3; j++) {
-                if (this->RecipeContents[i][j] != NULL) {
+                if (this->RecipeContents[i][j]->getname() != "") {
                     countExist++;
                 }
             }
@@ -52,7 +56,7 @@ void Recipe::updateRecipeColumnFull() {
         for (int i = 0; i <= 3; i++) {
             countExist = 0;
             for (int j = 0; j <= 3; j++) {
-                if (this->RecipeContents[j][i] != NULL) {
+                if (this->RecipeContents[j][i]->getname() != "") {
                     countExist++;
                 }
             }
@@ -64,31 +68,44 @@ void Recipe::updateRecipeColumnFull() {
     }
 }
 
+void Recipe::updateAllBoolean() {
+    this->updateRecipeFull();
+    this->updateRecipeRowFull();
+    this->updateRecipeColumnFull();
+}
+
 void Recipe::setRecipeResult(string newResult) {
     this->RecipeResult = newResult;
 }
 
-string getRecipeResult() const {
+string Recipe::getRecipeResult() const {
     return this->RecipeResult;
 }
 
-bool getIsRecipeFull() const {
+bool Recipe::getIsRecipeFull() const {
     return this->isRecipeFull;
 }
 
-bool getIsRecipeColumnFull() const {
+bool Recipe::getIsRecipeColumnFull() const {
     return this->isRecipeColumnFull;
 }
 
-bool getIsRecipeRowFull() const {
+bool Recipe::getIsRecipeRowFull() const {
     return this->isRecipeRowFull;
 }
 
-Item getIngredientByLocation(int row, int column) const {
-    ItemDetails target = this->RecipeContents[row][column];
-    return std::get<3>(target);
+Item* Recipe::getIngredientByLocation(int row, int column) const {
+    return this->RecipeContents[row][column];
 }
 
-int getIngredientsNeeded() const {
+int Recipe::getIngredientsNeeded() const {
     return this->IngredientsNeeded;
+}
+
+void Recipe::insertIngredient(int row, int column, Item* ingredient) {
+    if (this->RecipeContents[row][column]->getname() == "") {
+        this->RecipeContents[row][column] = ingredient;
+        this->IngredientsNeeded ++;
+        this->updateAllBoolean();
+    }
 }

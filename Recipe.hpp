@@ -9,7 +9,6 @@
 #include "Item.hpp"
 #include "command.hpp"
 #include "Libitem.hpp"
-#include "LibRecipe.hpp"
 
 #ifndef _RECIPE_HPP_
 #define _RECIPE_HPP_
@@ -18,8 +17,7 @@ using namespace std;
 
 class Recipe {
     private:
-        tuple<int, int, Item> ItemDetails;
-        ItemDetails *RecipeContents;
+        Item *RecipeContents[3][3];
         string RecipeResult;
         int IngredientsNeeded;
         bool isRecipeFull; // maksudnya menuhin semua kotak 3x3
@@ -32,17 +30,18 @@ class Recipe {
         void updateRecipeFull();
         void updateRecipeRowFull();
         void updateRecipeColumnFull();
+        void updateAllBoolean();
         void setRecipeResult(string newResult);
         string getRecipeResult() const;
         bool getIsRecipeFull() const;
         bool getIsRecipeRowFull() const;
         bool getIsRecipeColumnFull() const;
-        Item getIngredientByLocation(int row, int column) const;
+        Item* getIngredientByLocation(int row, int column) const;
         int getIngredientsNeeded() const;
         // Fungsi isi ItemDetails (agak complex dan harus nunggu confirm yang lain baru gw yakin implementasinya)
         void insertIngredient(int row, int column, Item* ingredient);
-        // Fungsi printer isi Recipe
-        void printRecipe();
+        // // Fungsi printer isi Recipe
+        // void printRecipe();
 };
 
 #endif
