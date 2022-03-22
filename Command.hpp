@@ -35,7 +35,7 @@ private:
     vector<string> dest;
 public:
     Move(string src, int N, vector<string> dest);
-    void Execute(Table <3,9> *inventory);
+    void Execute(Table <3,9> *inventory, Table <3,3> *crafting);
 };
 
 class Use {
