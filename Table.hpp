@@ -88,7 +88,7 @@ class Table {
             while (i < maxrow && !flag) {
                 j = 0;
                 while (j < maxcol && !flag) {
-                    if (this->item[i][j]->getname() == nt->getname() && !this->item[i][j]->isFull()) {
+                    if (this->item[i][j]->getid() == nt->getid() && !this->item[i][j]->isFull()) {
                         flag = true;
                         x = i;
                         y = j;
@@ -112,6 +112,7 @@ class Table {
                 }
 
             }
+
             while (nt->getquantity() > 0) {
                 x = getEmptyRow();
                 if (x != maxrow) {
@@ -142,6 +143,11 @@ class Table {
                 
                 if (k != id) {
                     i++;
+                } else {
+                    if (j == maxcol) {
+                        j = 0;
+                        i++;
+                    }
                 }
             }
 
@@ -173,6 +179,11 @@ class Table {
                 
                 if (idx1 != ID1) {
                     i++;
+                } else {
+                    if (j == maxcol) {
+                        j = 0;
+                        i++;
+                    }
                 }
             }
 
@@ -188,6 +199,11 @@ class Table {
                 
                 if (idx2 != ID2) {
                     k++;
+                } else {
+                    if (l == 3) {
+                        l = 0;
+                        k++;
+                    }
                 }
             }
 
@@ -267,6 +283,11 @@ class Table {
                 
                 if (idx1 != ID1) {
                     i++;
+                } else {
+                    if (j == maxcol) {
+                        j = 0;
+                        i++;
+                    }
                 }
             }
 
@@ -275,13 +296,18 @@ class Table {
             int l = 0;
             while (k < 3 && idx2 != ID2) {
                 l = 0;
-                while (l < 3 && idx2 != ID2) {
+                while (l < 9 && idx2 != ID2) {
                     l++;
                     idx2++;
                 }
                 
                 if (idx2 != ID2) {
                     k++;
+                } else {
+                    if (l == maxcol) {
+                        l = 0;
+                        k++;
+                    }
                 }
             }
 

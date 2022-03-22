@@ -46,8 +46,7 @@ void Give::Execute(Table <3,9> *inventory, libitem lib){
     NonTool* nontool;
     try{
         NonTool nt = lib.searchnontoolsbyname(this->name);
-        nontool = new NonTool(nt.getid(), nt.getname(), nt.gettype(), nt.getquantity());
-        nontool->add(this->qty);
+        nontool = new NonTool(nt.getid(), nt.getname(), nt.gettype(), this->qty);
         inventory->give(nontool);
         cout << "Give berhasil" << endl;
     }
@@ -105,7 +104,7 @@ void Move::Execute(Table <3,9> *inventory, Table <3,3> *crafting){
     }
     else if(src == 'C' && dest == 'I'){ //move from craft to ivnen
         if (checkCraftId(this->src) && checkID(this->dest[0])){
-            crafting->moveToInventory(getSlotID(this->dest[0]), getSlotID(this->src), inventory);
+            crafting->moveToInventory(getSlotID(this->src), getSlotID(this->dest[0]), inventory);
             cout << "Move craft to inventory" << endl;
         }
         else{
