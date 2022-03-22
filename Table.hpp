@@ -2,6 +2,7 @@
 #include "NonTool.hpp"
 #include "Tool.hpp"
 #include <math.h>
+#include <fstream>
 
 #ifndef _TABLE_HPP_
 #define _TABLE_HPP_
@@ -227,6 +228,29 @@ class Table {
             else {
                 //exception tidak sama item
             }
+        }
+
+        void exportFile(string filename) {
+            int ItemId, val;
+            ofstream outfile(filename);
+            for (int i = 0; i < maxrow; i++) {
+                for (int j = 0; j < maxcol; j++) {
+                    if (this->item[i][j]->isEmpty()){ //cek slot kosong
+                        outfile << "0:0" << endl;
+                    }
+                    else {
+                        ItemId = this->item[i][j]->getid();
+                        if (this->item[i][j]->isTool()){
+                            val = this->item[i][j]->getdurability();
+                        }
+                        else{
+                            val = this->item[i][j]->getquantity();
+                        }
+                        outfile << ItemId << ":" << val << endl;
+                    }
+                }
+            }
+            outfile.close();
         }
 };
 

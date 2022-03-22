@@ -20,6 +20,7 @@ int main(){
         cin >> command;
         if (command == "SHOW"){ //done
             crafting->show("C");
+            cout << endl;
             inventory->show("I");
         }
         else if (command == "GIVE"){ //done

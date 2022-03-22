@@ -45,7 +45,8 @@ Give::Give(string name, int qty){
 void Give::Execute(Table <3,9> *inventory, libitem lib){
     NonTool* nontool;
     try{
-        nontool = lib.searchnontoolsbyname(this->name);
+        NonTool nt = lib.searchnontoolsbyname(this->name);
+        nontool = new NonTool(nt.getid(), nt.getname(), nt.gettype(), nt.getquantity());
         nontool->add(this->qty);
         inventory->give(nontool);
         cout << "Give berhasil" << endl;
@@ -140,25 +141,7 @@ bool Export::checkFilename(){
 void Export::Execute(Table<3,9>* inventory){
     int row, col, val, ItemId;
     if (checkFilename()){
-        ofstream outfile(fileName);
-        for (int i=0;i<27;i++){
-            col = i % 9;
-            row = i / 9;
-            if (inventory->checkEmpty(row,col)){ //cek slot kosong
-                outfile << "0:0" << endl;
-            }
-            else{
-                ItemId = inventory->getItemId(row,col);
-                if (inventory->checkTool(row,col)){
-                    val = inventory->getDur(row,col);
-                }
-                else{
-                    val = inventory->getQty(row,col);
-                }
-                outfile << ItemId << ":" << val << endl;
-            }
-        }
-        outfile.close();
+        inventory->exportFile(fileName);
         cout << "Export berhasil" << endl;
     }
     else{
