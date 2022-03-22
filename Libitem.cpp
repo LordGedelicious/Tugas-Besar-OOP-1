@@ -34,7 +34,7 @@ NonTool libitem::searchnontoolsbyname(string name) const{
             return nt;
         }
     }
-    throw new ItemNotFoundException(name);
+    //throw new ItemNotFoundException(name);
 }
 
 NonTool libitem::searchnontoolsbyid(int id) const{
@@ -45,7 +45,7 @@ NonTool libitem::searchnontoolsbyid(int id) const{
         }
     }
     
-    throw new ItemNotFoundException(id);
+    //throw new ItemNotFoundException(id);
 }
 
 Tool libitem::searchtoolsbyname(string name) const{
@@ -56,7 +56,7 @@ Tool libitem::searchtoolsbyname(string name) const{
         }
     }
     
-    throw new ItemNotFoundException(name);
+    //throw new ItemNotFoundException(name);
 }
 
 Tool libitem::searchtoolsbyid(int id) const{
@@ -66,7 +66,7 @@ Tool libitem::searchtoolsbyid(int id) const{
             return t;
         }
     }
-    throw new ItemNotFoundException(id);
+    //throw new ItemNotFoundException(id);
 }
 
 void libitem::readFile(string fileName){

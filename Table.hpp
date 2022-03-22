@@ -42,6 +42,14 @@ class Table {
             return i;
         }
 
+        Item* getItem(int i, int j) {
+            return this->item[i][j];
+        }
+
+        void setItem(Item *item, int i, int j) {
+            this->item[i][j] = item;
+        }
+
         void show(string id) {
             int k = 0;
             for (int i = 0; i < maxrow; i++) {
@@ -152,38 +160,53 @@ class Table {
             }
         }
 
-        void useTool(int slotID) // COMMAND 7
-        {
-            int k = 0;
+        void moveToCraft(int ID1, int ID2, Table<3, 3> *craft) {
+            int idx1 = 0;
             int i = 0;
             int j = 0;
-            while (i < maxrow && k != slotID) {
+            while (i < maxrow && idx1 != ID1) {
                 j = 0;
-                while (j < maxcol && k != slotID) {
-                    k++;
+                while (j < maxcol && idx1 != ID1) {
+                    j++;
+                    idx1++;
                 }
                 
-                if (k != slotID) {
+                if (idx1 != ID1) {
                     i++;
                 }
             }
 
-            // IF FOUND
-            if (this->item[i][j]->isTool()) {
-                Tool *t = (Tool *) this->item[i][j];
-                t->use();
-                if (t->isDestroyed()) {
-                    delete this->item[i][j];
-                    this->item[i][j] = new NonTool(); //NT or Item
+            int idx2 = 0;
+            int k = 0;
+            int l = 0;
+            while (k < 3 && idx2 != ID2) {
+                l = 0;
+                while (l < 3 && idx2 != ID2) {
+                    l++;
+                    idx2++;
                 }
                 
-
-
+                if (idx2 != ID2) {
+                    k++;
+                }
             }
-            else {
-                //throw exception not a tool
+
+            if (!this->item[i][j]->isEmpty() && this->item[i][j]->isNonTool()) {
+                if (craft->getItem(k,l)->isEmpty()) {
+                    this->item[i][j]->substract(1);
+                    NonTool *nt = new NonTool(this->item[i][j]->getid(), this->item[i][j]->getname(), this->item[i][j]->gettype(), 1);
+                    delete craft->getItem(k,l);
+                    craft->setItem(nt, k, l);
+                    if (this->item[i][j]->isEmpty()) {
+                        delete this->item[i][j];
+                        this->item[i][j] = new NonTool();
+                    }
+                } else {
+                    // throw error
+                }
+            } else {
+                // throw error
             }
-            
         }
 
         void stackNonTool(int sID1, int sID2)  // COMMAND 5
@@ -228,6 +251,99 @@ class Table {
             }
             else {
                 //exception tidak sama item
+            }
+        }
+
+        void moveToInventory(int ID1, int ID2, Table<3, 9> *inventory) {
+            int idx1 = 0;
+            int i = 0;
+            int j = 0;
+            while (i < maxrow && idx1 != ID1) {
+                j = 0;
+                while (j < maxcol && idx1 != ID1) {
+                    j++;
+                    idx1++;
+                }
+                
+                if (idx1 != ID1) {
+                    i++;
+                }
+            }
+
+            int idx2 = 0;
+            int k = 0;
+            int l = 0;
+            while (k < 3 && idx2 != ID2) {
+                l = 0;
+                while (l < 3 && idx2 != ID2) {
+                    l++;
+                    idx2++;
+                }
+                
+                if (idx2 != ID2) {
+                    k++;
+                }
+            }
+
+            if (!this->item[i][j]->isEmpty() && this->item[i][j]->isNonTool()) {
+                if (inventory->getItem(k,l)->isEmpty()) {
+                    this->item[i][j]->substract(1);
+                    NonTool *nt = new NonTool(this->item[i][j]->getid(), this->item[i][j]->getname(), this->item[i][j]->gettype(), 1);
+                    delete inventory->getItem(k,l);
+                    inventory->setItem(nt, k, l);
+                } else {
+                    if (inventory->getItem(k,l)->isFull()) {
+                        // throw error
+                    } else {
+                        if (inventory->getItem(k,l)->getid() == this->item[i][j]->getid()) {
+                            this->item[i][j]->substract(1);
+                            inventory->getItem(k,l)->add(1);
+                        } else {
+                            // throw error
+                        }
+                    }
+                }
+
+                if (this->item[i][j]->isEmpty()) {
+                    delete this->item[i][j];
+                    this->item[i][j] = new NonTool();
+                }
+            } else {
+                // throw error
+            }
+        }
+
+        void useTool(int slotID) // COMMAND 7
+        {
+            int k = 0;
+            int i = 0;
+            int j = 0;
+            while (i < maxrow && k != slotID) {
+                j = 0;
+                while (j < maxcol && k != slotID) {
+                    j++;
+                    k++;
+                }
+                
+                if (k != slotID) {
+                    i++;
+                }
+            }
+
+            // IF FOUND
+            if (this->item[i][j]->isTool()) {
+                Tool *t = (Tool *) this->item[i][j];
+                t->use();
+                if (t->isDestroyed()) {
+                    delete this->item[i][j];
+                    this->item[i][j] = new NonTool(); //NT or Item
+                }
+                
+
+
+            }
+            else {
+                //throw exception not a tool
             }
         }
 
