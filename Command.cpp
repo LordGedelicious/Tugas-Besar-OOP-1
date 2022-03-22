@@ -79,7 +79,7 @@ Move::Move(string src, int N, vector<string> dest){
     this->dest = dest;
 }
 
-void Move::Execute(Table <3,9> *inventory){
+void Move::Execute(Table <3,9> *inventory, Table <3,3> *crafting){
     char src = this->src[0];
     char dest = this->dest[0][0];
 
@@ -93,10 +93,24 @@ void Move::Execute(Table <3,9> *inventory){
         }
     }
     else if(src == 'I' && dest == 'C'){
-        cout << "Move inventory to craft" << endl;
+        if (checkID(this->src) && checkCraftId(this->dest[0])){
+            for (int i=0;i<this->N;i++){
+                inventory->moveToCraft(getSlotID(this->src), getSlotID(this->dest[i]), crafting);
+            }
+            cout << "Move inventory to craft" << endl;
+        }
+        else{
+            cout << "Masukan salah" << endl;
+        }
     }
-    else if(src == 'C' && dest == 'I'){
-        cout << "Move craft to inventory" << endl;
+    else if(src == 'C' && dest == 'I'){ //move from craft to ivnen
+        if (checkCraftId(this->src) && checkID(this->dest[0])){
+            crafting->moveToInventory(getSlotID(this->dest[0]), getSlotID(this->src), inventory);
+            cout << "Move craft to inventory" << endl;
+        }
+        else{
+            cout << "Masukan salah" << endl;
+        }
     }
     else{
         cout << "masukan salah" << endl;
