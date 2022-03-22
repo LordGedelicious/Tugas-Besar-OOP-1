@@ -2,8 +2,12 @@
 #include "Item.hpp"
 #include "Tool.hpp"
 #include "NonTool.hpp"
+#include "Exception/BaseException.hpp"
 #include <vector>
+#include <iostream>
 #include <fstream>
+#include <string.h>
+using namespace std;
 
 #ifndef LIBITEM_HPP_
 #define LIBITEM_HPP_

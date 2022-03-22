@@ -1,7 +1,5 @@
 #include "Libitem.hpp"
-#include <iostream>
-#include <string.h>
-using namespace std;
+
 
 libitem::libitem() {
     
@@ -36,7 +34,7 @@ NonTool libitem::searchnontoolsbyname(string name) const{
             return nt;
         }
     }
-    throw "not found";
+    throw new ItemNotFoundException(name);
 }
 
 NonTool libitem::searchnontoolsbyid(int id) const{
@@ -46,7 +44,8 @@ NonTool libitem::searchnontoolsbyid(int id) const{
             return nt;
         }
     }
-    throw "not found";
+    
+    throw new ItemNotFoundException(id);
 }
 
 Tool libitem::searchtoolsbyname(string name) const{
@@ -56,7 +55,8 @@ Tool libitem::searchtoolsbyname(string name) const{
             return t;
         }
     }
-    throw "not found";
+    
+    throw new ItemNotFoundException(name);
 }
 
 Tool libitem::searchtoolsbyid(int id) const{
@@ -66,7 +66,7 @@ Tool libitem::searchtoolsbyid(int id) const{
             return t;
         }
     }
-    throw "not found";
+    throw new ItemNotFoundException(id);
 }
 
 void libitem::readFile(string fileName){
@@ -82,14 +82,28 @@ void libitem::readFile(string fileName){
     }
 }
 
-int main() {
-    libitem li;
-    li.addItem(1,"wood", "plank", "nontool");
-    li.addItem(2,"oak", "plank", "nontool");
-    li.addItem(3,"wooden_sword", "-", "tool");
-    li.printlibitem();
-    string search = "wood";
-    NonTool i = li.searchnontoolsbyname(search);
-    cout << i.getname();
-    return 0;
-}
+// Buat ngetest aja
+// int main() {
+//     libitem li;
+//     li.addItem(1,"wood", "plank", "NONTOOL");
+//     li.addItem(2,"oak", "plank", "NONTOOL");
+//     li.addItem(3,"wooden_sword", "-", "TOOL");
+//     li.printlibitem();
+//     try {
+//         string search = "wood";
+//         NonTool i = li.searchnontoolsbyname(search);
+//         cout << i.getname() << endl;
+//     } catch (BaseException* e) {
+//         ItemNotFoundException* e_out = (ItemNotFoundException*)e; 
+//         e_out->printMessage();
+//     }
+//     try {
+//         string search = "anjay";
+//         NonTool i = li.searchnontoolsbyname(search);
+//         cout << i.getname();
+//     } catch (BaseException* e) {
+//         ItemNotFoundException* e_out = (ItemNotFoundException*)e; 
+//         e_out->printMessage();
+//     }
+//     return 0;
+// }
