@@ -43,7 +43,7 @@ int main(){
                 dest.push_back(x);
             }
             Move move(src,N,dest);
-            move.Execute(inventory);
+            move.Execute(inventory,crafting);
             dest.clear();
         }
         else if (command == "USE"){//add exception handling
