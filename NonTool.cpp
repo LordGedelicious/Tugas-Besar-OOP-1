@@ -39,3 +39,10 @@ bool NonTool::isFull() {
 bool NonTool::isEmpty() {
     return (this->quantity == 0);
 }
+
+void NonTool::operator=(const NonTool other) {
+    this->quantity = other.quantity;
+    this->name = other.name;
+    this->type = other.type;
+    this->category = other.category;
+}

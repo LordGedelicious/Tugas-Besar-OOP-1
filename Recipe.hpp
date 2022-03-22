@@ -17,30 +17,25 @@ using namespace std;
 
 class Recipe {
     private:
-        Item *RecipeContents[3][3];
+        NonTool **RecipeContents;
         string RecipeResult;
-        int IngredientsNeeded;
-        bool isRecipeFull; // maksudnya menuhin semua kotak 3x3
-        bool isRecipeRowFull; // maksudnya menuhin satu baris dari 3 baris yang ada
-        bool isRecipeColumnFull; // maksudnya menuhin satu kolom dari 3 kolom yang ada
+        int resultQty;
+        int rowSize;
+        int colSize;
+        const int maxRowSize = 3;
+        const int maxColumnSize = 3;
     public:
-        // by default kosong, diisinya make fungsi lain
-        Recipe();
+        // by default cuma diisi sama rowSize sama columnSize, diisinya make fungsi lain
+        Recipe(int rowSize, int colSize);
         // Fungsi getter dan setter (basic)
-        void updateRecipeFull();
-        void updateRecipeRowFull();
-        void updateRecipeColumnFull();
-        void updateAllBoolean();
         void setRecipeResult(string newResult);
         string getRecipeResult() const;
-        bool getIsRecipeFull() const;
-        bool getIsRecipeRowFull() const;
-        bool getIsRecipeColumnFull() const;
-        Item* getIngredientByLocation(int row, int column) const;
-        int getIngredientsNeeded() const;
+        void setResultQty(int newQty);
+        int getResultQty() const;
+        Item getIngredientByLocation(int row, int column) const;
         // Fungsi isi ItemDetails (agak complex dan harus nunggu confirm yang lain baru gw yakin implementasinya)
-        void insertIngredient(int row, int column, Item* ingredient);
-        // // Fungsi printer isi Recipe
+        void insertIngredient(int row, int column, string ingredient, libitem library);
+        // Fungsi printer isi Recipe
         // void printRecipe();
 };
 

@@ -7,7 +7,7 @@
 using namespace std;
 
 class Item {
-    private:
+    protected:
         const int id;
         string name;
         string type;

@@ -16,6 +16,7 @@ class NonTool : public Item {
         void substract(int _quantity);
         bool isFull();
         bool isEmpty();
+        void operator=(const NonTool other);
 };
 
 #endif
