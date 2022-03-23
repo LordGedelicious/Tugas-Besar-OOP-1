@@ -125,9 +125,23 @@ class Table {
                     } else {
                         nt->substract(nt->getquantity());
                     }
+                } else {
+                    // throw error
                 }
             }
             delete nt;
+        }
+
+        void give(Tool *t) {
+            int x = getEmptyRow();
+            if (x != maxrow) {
+                int y = getEmptyCol(x);
+                delete this->item[x][y];
+                this->item[x][y] = new Tool(t->getid(), t->getname(), t->gettype(), t->getdurability());
+                delete t;
+            } else {
+                // throw error
+            }
         }
 
         void discard(int id, int count) {
