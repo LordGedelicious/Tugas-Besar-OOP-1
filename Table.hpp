@@ -221,13 +221,20 @@ class Table {
                 }
             }
 
-            if (!this->item[i][j]->isEmpty() && this->item[i][j]->isNonTool()) {
+            if (!this->item[i][j]->isEmpty()) {
                 if (craft->getItem(k,l)->isEmpty()) {
-                    this->item[i][j]->substract(1);
-                    NonTool *nt = new NonTool(this->item[i][j]->getid(), this->item[i][j]->getname(), this->item[i][j]->gettype(), 1);
                     delete craft->getItem(k,l);
-                    craft->setItem(nt, k, l);
-                    if (this->item[i][j]->isEmpty()) {
+                    if (this->item[i][j]->isNonTool()) {
+                        this->item[i][j]->substract(1);
+                        NonTool *nt = new NonTool(this->item[i][j]->getid(), this->item[i][j]->getname(), this->item[i][j]->gettype(), 1);                        
+                        craft->setItem(nt, k, l);
+                        if (this->item[i][j]->isEmpty()) {
+                            delete this->item[i][j];
+                            this->item[i][j] = new NonTool();
+                        }
+                    } else {
+                        Tool *t = new Tool(this->item[i][j]->getid(), this->item[i][j]->getname(), this->item[i][j]->gettype(), this->item[i][j]->getdurability());
+                        craft->setItem(t, k, l);
                         delete this->item[i][j];
                         this->item[i][j] = new NonTool();
                     }
@@ -325,28 +332,40 @@ class Table {
                 }
             }
 
-            if (!this->item[i][j]->isEmpty() && this->item[i][j]->isNonTool()) {
-                if (inventory->getItem(k,l)->isEmpty()) {
-                    this->item[i][j]->substract(1);
-                    NonTool *nt = new NonTool(this->item[i][j]->getid(), this->item[i][j]->getname(), this->item[i][j]->gettype(), 1);
-                    delete inventory->getItem(k,l);
-                    inventory->setItem(nt, k, l);
-                } else {
-                    if (inventory->getItem(k,l)->isFull()) {
-                        // throw error
+            if (!this->item[i][j]->isEmpty()) {
+                if (this->item[i][j]->isNonTool()) {
+                    if (inventory->getItem(k,l)->isEmpty()) {
+                        this->item[i][j]->substract(1);
+                        NonTool *nt = new NonTool(this->item[i][j]->getid(), this->item[i][j]->getname(), this->item[i][j]->gettype(), 1);
+                        delete inventory->getItem(k,l);
+                        inventory->setItem(nt, k, l);
                     } else {
-                        if (inventory->getItem(k,l)->getid() == this->item[i][j]->getid()) {
-                            this->item[i][j]->substract(1);
-                            inventory->getItem(k,l)->add(1);
-                        } else {
+                        if (inventory->getItem(k,l)->isFull()) {
                             // throw error
+                        } else {
+                            if (inventory->getItem(k,l)->getid() == this->item[i][j]->getid()) {
+                                this->item[i][j]->substract(1);
+                                inventory->getItem(k,l)->add(1);
+                            } else {
+                                // throw error
+                            }
                         }
                     }
-                }
 
-                if (this->item[i][j]->isEmpty()) {
-                    delete this->item[i][j];
-                    this->item[i][j] = new NonTool();
+                    if (this->item[i][j]->isEmpty()) {
+                        delete this->item[i][j];
+                        this->item[i][j] = new NonTool();
+                    }
+                } else {
+                    if (inventory->getItem(k,l)->isEmpty()) {
+                        Tool *t = new Tool(this->item[i][j]->getid(), this->item[i][j]->getname(), this->item[i][j]->gettype(), this->item[i][j]->getdurability());
+                        delete inventory->getItem(k,l);
+                        inventory->setItem(t, k, l);
+                        delete this->item[i][j];
+                        this->item[i][j] = new NonTool();
+                    } else {
+                        // throw error
+                    }
                 }
             } else {
                 // throw error
