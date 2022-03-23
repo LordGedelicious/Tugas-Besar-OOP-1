@@ -29,6 +29,8 @@ class RecipeList : public Recipe {
         Recipe getRecipe(int index) const;
         // Fungsi untuk mengisi RecipeList
         void addRecipes(const Recipe newRecipe);
+        // Fungsi untuk mendapatkan resep yang cocok untuk crafting
+        Recipe checkCrafting(Table<3,3> C);
 };
 
 #endif // _LIBRECIPE_HPP_

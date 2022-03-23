@@ -20,9 +20,17 @@ Recipe RecipeList::getRecipe(int index) const {
     }
 }
 
-void RecipeList::addRecipes(const Recipe newRecipe) {
-    if (this->currentSize < this->maxSize) {
-        this->List[this->currentSize] = newRecipe;
-        this->currentSize ++;
+// void RecipeList::addRecipes(const Recipe newRecipe) {
+//     if (this->currentSize < this->maxSize) {
+//         this->List[this->currentSize] = newRecipe;
+//         this->currentSize ++;
+//     }
+// }
+
+Recipe RecipeList::checkCrafting(Table<3,3> C) {
+    for (int i=0; i<currentSize; i++) {
+        if (this->List[i].checkRecipe(C)) {
+            return this->List[i];
+        }
     }
 }

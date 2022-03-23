@@ -44,14 +44,26 @@ Give::Give(string name, int qty){
 
 void Give::Execute(Table <3,9> *inventory, libitem lib){
     NonTool* nontool;
+    Tool* tool;
     try{
         NonTool nt = lib.searchnontoolsbyname(this->name);
         nontool = new NonTool(nt.getid(), nt.getname(), nt.gettype(), this->qty);
         inventory->give(nontool);
         cout << "Give berhasil" << endl;
     }
-    catch (string notFound){
+    catch (string notFound){ //gataudah ini bener ato belom
         cout << notFound << endl;
+        try{
+            Tool t = lib.searchtoolsbyname(this->name);
+            tool = new Tool(t.getid(), t.getname(), t.gettype(), 10);
+            for (int i=0;i<this->qty;i++){
+                inventory->give(tool);
+            }
+            cout << "Give berhasil" << endl;
+        }
+        catch (string notFound){
+            cout << notFound << endl;
+        }
     }
 }
 

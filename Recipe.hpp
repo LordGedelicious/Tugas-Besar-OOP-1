@@ -4,10 +4,11 @@
 #include <vector>
 #include <tuple>
 #include <string>
+#include <iostream>
 
 // Include other header files
 #include "Item.hpp"
-#include "command.hpp"
+#include "Command.hpp"
 #include "Libitem.hpp"
 
 #ifndef _RECIPE_HPP_
@@ -17,7 +18,7 @@ using namespace std;
 
 class Recipe {
     private:
-        NonTool **RecipeContents;
+        string **RecipeContents;
         string RecipeResult;
         int resultQty;
         int rowSize;
@@ -26,17 +27,25 @@ class Recipe {
         const int maxColumnSize = 3;
     public:
         // by default cuma diisi sama rowSize sama columnSize, diisinya make fungsi lain
-        Recipe(int rowSize, int colSize);
+        Recipe();
+        //Recipe(int rowSize, int colSize);
         // Fungsi getter dan setter (basic)
         void setRecipeResult(string newResult);
         string getRecipeResult() const;
         void setResultQty(int newQty);
         int getResultQty() const;
-        Item getIngredientByLocation(int row, int column) const;
+        void setRowSize (int rowSize);
+        int getRowSize() const;
+        void setColSize (int colSize);
+        int getColSize() const;
+
+        string getIngredientByLocation(int row, int column) const;
         // Fungsi isi ItemDetails (agak complex dan harus nunggu confirm yang lain baru gw yakin implementasinya)
-        void insertIngredient(int row, int column, string ingredient, libitem library);
+        void insertIngredient(int row, int column, string ingredient);
         // Fungsi printer isi Recipe
-        // void printRecipe();
+        void printRecipe();
+        // Fungsi untuk cek apakah resep cocok
+        bool checkRecipe(Table<3,3> C);
 };
 
 #endif

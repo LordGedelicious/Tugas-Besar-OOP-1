@@ -1,9 +1,29 @@
 #include <iostream>
 #include <string>
+#include <fstream>
+#include <sstream>
+#include <iterator>
+#include <vector>
+#include <algorithm>
+#include "Recipe.hpp"
 #include "Table.hpp"
 #include "Command.hpp"
 #include "Libitem.hpp"
+#include "LibRecipe.hpp"
 using namespace std;
+
+vector<string> splitString(string full){
+    string space_delimiter = " ";
+    vector<string> words{};
+
+    size_t pos = 0;
+    while ((pos = full.find(space_delimiter)) != string::npos) {
+        words.push_back(full.substr(0, pos));
+        full.erase(0, pos + space_delimiter.length());
+    }
+    words.push_back(full);
+    return words;
+}
 
 int main(){
     int slotID, itemQty, N;
@@ -15,6 +35,37 @@ int main(){
     libitem lib;
     lib.readFile("item.txt");
 
+    //UNTUK COBA CRAFTING
+    vector<string> ingredients;
+
+    string str;
+    ifstream file("DIAMOND_PICKAXE.txt");
+    Recipe stick;
+    if (file.is_open()){
+        getline(file,str,' ');
+        stick.setRowSize(stoi(str));
+        getline(file,str);
+        stick.setColSize(stoi(str));
+        for (int i=0;i<stick.getRowSize();i++){
+            getline(file,str);
+            ingredients = splitString(str);
+            for (int j=0;j<ingredients.size();j++){
+                stick.insertIngredient(i,j,ingredients[j]);
+            }
+        }
+        getline(file,str,' ');
+        stick.setRecipeResult(str);
+        getline(file,str);
+        stick.setResultQty(stoi(str));
+    }
+    stick.printRecipe();
+
+    RecipeList rList;
+    rList.addRecipes(stick);
+
+    
+
+    /*
     cout << "Uji coba" << endl;
     while (true){
         cin >> command;
@@ -67,4 +118,5 @@ int main(){
             cout << "Command Invalid" << endl;
         }
     }
+    */
 };
