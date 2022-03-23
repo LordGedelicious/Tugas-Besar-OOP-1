@@ -304,7 +304,7 @@ class Table {
                 if (idx2 != ID2) {
                     k++;
                 } else {
-                    if (l == maxcol) {
+                    if (l == 9) {
                         l = 0;
                         k++;
                     }
