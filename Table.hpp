@@ -51,6 +51,17 @@ class Table {
             this->item[i][j] = item;
         }
 
+        void clearAll() {
+            for (int i = 0; i < maxrow; i++) {
+                for (int j = 0; j < maxcol; j++) {
+                    if (!this->item[i][j]->isEmpty()) {
+                        delete this->item[i][j];
+                        this->item[i][j] = new NonTool();
+                    }
+                }
+            }
+        }
+
         void show(string id) {
             int k = 0;
             for (int i = 0; i < maxrow; i++) {
@@ -406,7 +417,8 @@ class Table {
 
         void exportFile(string filename) {
             int ItemId, val;
-            ofstream outfile(filename);
+            string full = "Export\\" + filename;
+            ofstream outfile(full);
             for (int i = 0; i < maxrow; i++) {
                 for (int j = 0; j < maxcol; j++) {
                     if (this->item[i][j]->isEmpty()){ //cek slot kosong

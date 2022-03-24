@@ -1,8 +1,8 @@
 #include "Item.hpp"
 
 Item::Item() : id(0) {
-    this->name = "";
-    this->type = "";
+    this->name = "-";
+    this->type = "-";
     this->category = '-';
 }
 

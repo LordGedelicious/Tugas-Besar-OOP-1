@@ -26,7 +26,7 @@ void RecipeList::addRecipes(const Recipe newRecipe) {
 
 Recipe RecipeList::checkCrafting(Table<3,3>* C) {
     for (int i=0; i<this->List.size(); i++) {
-        if (this->List[i].checkRecipe(C)) {
+        if (this->List[i].checkRecipe(C) || (this->List[i]).mirrorY().checkRecipe(C)) {
             return this->List[i];
         }
     }
