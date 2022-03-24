@@ -73,13 +73,14 @@ Recipe RecipeList::checkCrafting(Table<3,3>* C) {
         i++;
     }
 
-    if (valid && toolCount == 2) {
-        RecDur = min(RecDur, 10);
-        Recipe ret = Recipe();
-        ret.setResultQty(RecDur);
-        ret.setRecipeResult(RecName);
-        return ret;
-    }
+    // if (valid && toolCount == 2) {
+    //     RecDur = min(RecDur, 10);
+    //     Recipe ret = Recipe();
+    //     ret.setResultQty(RecDur);
+    //     ret.setRecipeResult(RecName);
+    //     cout << "THIS IS A TOOL" << endl;
+    //     return ret;
+    // }
 
 
     string lempar = "Astaga";
