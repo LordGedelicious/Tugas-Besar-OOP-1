@@ -1,2 +1,3 @@
-g++ main.cpp item.cpp libitem.cpp nontool.cpp table.hpp tool.cpp command.cpp
+g++ -o main *.cpp -std=c++17
+.\main
 pause
