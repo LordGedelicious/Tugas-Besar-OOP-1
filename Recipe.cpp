@@ -79,7 +79,7 @@ bool Recipe::checkRecipe(Table<3,3> *C) {
 
     int a, b;
 
-
+    
     while (!found && i<=(3 - this->getRowSize())) {
         j = 0;
         while (!found && j<=(3- this->getColSize())) {
@@ -97,11 +97,13 @@ bool Recipe::checkRecipe(Table<3,3> *C) {
                         // is a type
                         if (RecipeItem.compare(CraftItemType) == 0) {
                             // still same
+                            
 
                         }
                         else {
                             // not same
                             same = false;
+                           
 
                         }
                     }
@@ -110,15 +112,22 @@ bool Recipe::checkRecipe(Table<3,3> *C) {
 
                         if (RecipeItem.compare(CraftItemName) == 0) {
                             // still same
+                            
 
                         }
                         else {
                             // not same
                             same = false;
+                      
 
                         }
                     }
 
+                    
+                    b++;
+                }
+                a++;
+            }
                     if (same) {
                         // check if all others are null item
                         found = true;
@@ -130,6 +139,7 @@ bool Recipe::checkRecipe(Table<3,3> *C) {
                                 if (x>=i && x<i+getRowSize() && y>=j && y<j+getColSize()) {
                                     // OKAY
 
+
                                 }
                                 else {
                                     CraftItemName = C->getItem(x, y)->getname();
@@ -140,6 +150,7 @@ bool Recipe::checkRecipe(Table<3,3> *C) {
                                     else {
                                         // OKAY
 
+
                                     }
                                 }
                                 y++;
@@ -147,11 +158,6 @@ bool Recipe::checkRecipe(Table<3,3> *C) {
                             x++;
                         }
                     }
-                    
-                    b++;
-                }
-                a++;
-            }
 
 
             j++;

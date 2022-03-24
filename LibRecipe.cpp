@@ -25,61 +25,121 @@ void RecipeList::addRecipes(const Recipe newRecipe) {
     this->List.push_back(newRecipe);
 }
 
+bool RecipeList::checkPurePairTool(Table<3,3> *C){
+    bool pair = true;
+    bool pure = true;
+    bool found = false;
+    string toolName;
+    int toolCount = 0;
+    for (int i=0;i<3;i++){
+        for (int j=0;j<3;j++){
+            if (C->getItem(i,j)->isNonTool()){
+                pure = false;
+                break;
+            }
+            if (C->getItem(i,j)->isTool()){
+                if (!found){
+                    toolName = C->getItem(i,j)->getname();
+                    toolCount += 1;
+                }
+                else{
+                    if (C->getItem(i,j)->getname() != toolName){
+                        pure = false;
+                        break;
+                    }
+                    toolCount += 1;
+                }
+            }
+        }
+    }
+    if (toolCount != 2){
+        pair = false;
+    }
+    return pair && pure;
+}
+
 Recipe RecipeList::checkCrafting(Table<3,3>* C) {
+    //CRAFT TOOL
+    Recipe newRes;
+    string name;
+    bool found;
+    int dur1, dur2, dur;
+    if (checkPurePairTool(C)){
+        for (int i=0;i<3;i++){
+            for (int j=0;j<3;j++){
+                if (C->getItem(i,j)->isTool()){
+                    if (!found){
+                        found = true;
+                        name = C->getItem(i,j)->getname();
+                        dur1 = C->getItem(i,j)->getdurability();
+                    }
+                    else{
+                        dur2 = C->getItem(i,j)->getdurability();
+                    }
+                }
+            }
+        }
+        dur = min(10, dur2 + dur1);
+        newRes.setRecipeResult(name);
+        newRes.setResultQty(dur);
+        newRes.setColSize(-999);
+        return newRes;
+    }
+
     // CHECK FOR NONTOOL CRAFT
     for (int i=0; i<this->List.size(); i++) {
         if (this->List[i].checkRecipe(C) || (this->List[i]).mirrorY().checkRecipe(C)) {
             return this->List[i];
         }
     }
-    // CHECK FOR TOOL CRAFT
-    int toolCount = 0;
-    bool valid = true;
-    int curID;
-    string RecName;
-    int RecDur = 0;
+    // // CHECK FOR TOOL CRAFT
+    // int toolCount = 0;
+    // bool valid = true;
+    // int curID;
+    // string RecName;
+    // int RecDur = 0;
 
-    int i=0;
-    int j=0;
-    while (valid && i<3) {
-        j=0;
-        while (valid && j<3) {
-            if ((C->getItem(i,j)->getname()).compare("-") != 0) {
-                // NOT NULL
-                if (C->getItem(i,j)->isNonTool()) {
-                    // not a tool
-                    valid = false;
-                }
-                else {
-                    // a tool
-                    if (toolCount == 0) {
-                        curID = C->getItem(i,j)->getid();
-                        RecName = C->getItem(i,j)->getname();
-                        RecDur += C->getItem(i,j)->getdurability();
-                    }
-                    else {
-                        if (curID != C->getItem(i,j)->getid()) {
-                            valid = false;
-                        }
-                        else {
-                            RecDur += C->getItem(i,j)->getdurability();
-                            toolCount++;
-                        }
-                    }
-                }
-            }
-            j++;
-        }
-        i++;
-    }
+    // int i=0;
+    // int j=0;
+    // while (valid && i<3) {
+    //     j=0;
+    //     while (valid && j<3) {
+    //         if ((C->getItem(i,j)->getname()).compare("-") != 0) {
+    //             // NOT NULL
+    //             if (C->getItem(i,j)->isNonTool()) {
+    //                 // not a tool
+    //                 valid = false;
+    //             }
+    //             else {
+    //                 // a tool
+    //                 if (toolCount == 0) {
+    //                     curID = C->getItem(i,j)->getid();
+    //                     RecName = C->getItem(i,j)->getname();
+    //                     RecDur += C->getItem(i,j)->getdurability();
+    //                 }
+    //                 else {
+    //                     if (curID != C->getItem(i,j)->getid()) {
+    //                         valid = false;
+    //                     }
+    //                     else {
+    //                         RecDur += C->getItem(i,j)->getdurability();
+    //                         toolCount++;
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //         j++;
+    //     }
+    //     i++;
+    // }
 
-    if (valid && toolCount == 2) {
-        RecDur = min(RecDur, 10);
-        Recipe ret = Recipe();
-        ret.setResultQty(RecDur);
-        ret.setRecipeResult(RecName);
-        return ret;
-    }
+    // if (valid && toolCount == 2) {
+    //     RecDur = min(RecDur, 10);
+    //     Recipe ret = Recipe();
+    //     ret.setResultQty(RecDur);
+    //     ret.setRecipeResult(RecName);
+    //     return ret;
+    // }
 
 
     string lempar = "Astaga";

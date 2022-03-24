@@ -153,8 +153,16 @@ Craft::Craft(){
 void Craft::Execute(Table <3,3> *crafting, Table <3,9> *inventory, RecipeList rList, libitem lib){
     try{
         Recipe newRes = rList.checkCrafting(crafting);
-        Give give(newRes.getRecipeResult(), newRes.getResultQty());
-        give.Execute(inventory, lib);
+        if (newRes.getColSize() == -999){
+            Tool* tool;
+            Tool t = lib.searchtoolsbyname(newRes.getRecipeResult());
+            tool = new Tool(t.getid(), t.getname(), t.gettype(), newRes.getResultQty());
+            inventory->give(tool);
+        }
+        else{
+            Give give(newRes.getRecipeResult(), newRes.getResultQty());
+            give.Execute(inventory, lib);
+        }
         crafting->clearAll();
     }
     catch(BaseException* e){
