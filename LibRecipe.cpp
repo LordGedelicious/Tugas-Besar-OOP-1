@@ -1,5 +1,6 @@
 #include "LibRecipe.hpp"
 #include "Recipe.hpp"
+#include <math.h>
 
 using std::filesystem::directory_iterator;
 
@@ -25,11 +26,62 @@ void RecipeList::addRecipes(const Recipe newRecipe) {
 }
 
 Recipe RecipeList::checkCrafting(Table<3,3>* C) {
+    // CHECK FOR NONTOOL CRAFT
     for (int i=0; i<this->List.size(); i++) {
         if (this->List[i].checkRecipe(C) || (this->List[i]).mirrorY().checkRecipe(C)) {
             return this->List[i];
         }
     }
+    // CHECK FOR TOOL CRAFT
+    int toolCount = 0;
+    bool valid = true;
+    int curID;
+    string RecName;
+    int RecDur = 0;
+
+    int i=0;
+    int j=0;
+    while (valid && i<3) {
+        j=0;
+        while (valid && j<3) {
+            if ((C->getItem(i,j)->getname()).compare("-") != 0) {
+                // NOT NULL
+                if (C->getItem(i,j)->isNonTool()) {
+                    // not a tool
+                    valid = false;
+                }
+                else {
+                    // a tool
+                    if (toolCount == 0) {
+                        curID = C->getItem(i,j)->getid();
+                        RecName = C->getItem(i,j)->getname();
+                        RecDur += C->getItem(i,j)->getdurability();
+                    }
+                    else {
+                        if (curID != C->getItem(i,j)->getid()) {
+                            valid = false;
+                        }
+                        else {
+                            RecDur += C->getItem(i,j)->getdurability();
+                            toolCount++;
+                        }
+                    }
+                }
+            }
+            j++;
+        }
+        i++;
+    }
+
+    if (valid && toolCount == 2) {
+        RecDur = min(RecDur, 10);
+        Recipe ret = Recipe();
+        ret.setResultQty(RecDur);
+        ret.setRecipeResult(RecName);
+        return ret;
+    }
+
+
     string lempar = "Astaga";
     throw lempar;
 }
