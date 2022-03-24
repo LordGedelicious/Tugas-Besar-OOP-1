@@ -1,5 +1,13 @@
 #include "BaseException.hpp"
 
+BaseException::BaseException() {
+    this->expType = "";
+}
+
+string BaseException::getExpType() const{
+    return expType;
+}
+
 DiscardInvalidException::DiscardInvalidException(int slotID) {
     this->slotID = slotID;
 }
@@ -9,7 +17,7 @@ void DiscardInvalidException::printMessage() {
 }
 
 InventoryFullException::InventoryFullException() {
-
+    
 }
 
 void InventoryFullException::printMessage() {
@@ -17,11 +25,13 @@ void InventoryFullException::printMessage() {
 }
 
 ItemNotFoundException::ItemNotFoundException(string name) {
+    this->expType = "ItemNF";
     id = -999;
     this->name = name; 
 }
 
 ItemNotFoundException::ItemNotFoundException(int id) {
+    this->expType = "ItemNF";
     this->id = id;
     this->name = "";
 }

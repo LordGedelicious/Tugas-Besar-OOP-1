@@ -138,8 +138,7 @@ class Table {
                         nt->substract(nt->getquantity());
                     }
                 } else {
-                    delete nt;
-                    throw InventoryFullException();
+                    throw new InventoryFullException();
                 }
             }
             delete nt;
@@ -153,7 +152,7 @@ class Table {
                 this->item[x][y] = new Tool(t->getid(), t->getname(), t->gettype(), t->getdurability());
                 delete t;
             } else {
-                throw InventoryFullException();
+                throw new InventoryFullException();
             }
         }
 
@@ -179,7 +178,7 @@ class Table {
             }
 
             if (this->item[i][j]->isEmpty()) {
-                throw DiscardInvalidException(k);
+                throw new DiscardInvalidException(k);
             } else {
                 if (this->item[i][j]->getquantity() >= count) {
                     this->item[i][j]->substract(count);
@@ -188,7 +187,7 @@ class Table {
                         this->item[i][j] = new NonTool();
                     }
                 } else {
-                    throw DiscardInvalidException(k);
+                    throw new DiscardInvalidException(k);
                 }
             }
         }
@@ -252,10 +251,10 @@ class Table {
                         this->item[i][j] = new NonTool();
                     }
                 } else {
-                    throw NotEmptySlotException('C', idx2);
+                    throw new NotEmptySlotException('C', idx2);
                 }
             } else {
-                throw EmptySlotException('C', idx2);
+                throw new EmptySlotException('I', idx1);
             }
         }
 
@@ -294,12 +293,12 @@ class Table {
                     item[i2][j2]->add(moveq);
                 }
                 else {
-                    throw NotNonToolException(item[i1][j1]);
+                    throw new NotNonToolException(item[i1][j1]);
                 }
 
             }
             else {
-                throw ItemInvalidException(item[i1][j1], item[i2][j2]);
+                throw new ItemInvalidException(item[i1][j1], item[i2][j2]);
             }
         }
 
@@ -353,13 +352,13 @@ class Table {
                         inventory->setItem(nt, k, l);
                     } else {
                         if (inventory->getItem(k,l)->isFull()) {
-                            // throw error
+                            throw new NotEmptySlotException('C',idx2);
                         } else {
                             if (inventory->getItem(k,l)->getid() == this->item[i][j]->getid()) {
                                 this->item[i][j]->substract(1);
                                 inventory->getItem(k,l)->add(1);
                             } else {
-                                // throw error
+                                throw new ItemInvalidException(getItem(k,l), item[i][j]);
                             }
                         }
                     }
@@ -376,7 +375,7 @@ class Table {
                         delete this->item[i][j];
                         this->item[i][j] = new NonTool();
                     } else {
-                        // throw error
+                        throw new EmptySlotException('C',getItem(k,l)->getid());
                     }
                 }
             } else {

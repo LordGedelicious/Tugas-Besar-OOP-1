@@ -52,16 +52,20 @@ void Give::Execute(Table <3,9> *inventory, libitem lib){
         cout << "Give berhasil" << endl;
     }
     catch (BaseException* e1){ //gataudah ini bener ato belom
-        try{
-            Tool t = lib.searchtoolsbyname(this->name);
-            for (int i=0;i<this->qty;i++){
-                tool = new Tool(t.getid(), t.getname(), t.gettype(), 10);
-                inventory->give(tool);
+        if (e1->getExpType() == "ItemNF") {
+            try{
+                Tool t = lib.searchtoolsbyname(this->name);
+                for (int i=0;i<this->qty;i++){
+                    tool = new Tool(t.getid(), t.getname(), t.gettype(), 10);
+                    inventory->give(tool);
+                }
+                cout << "Give berhasil" << endl;
             }
-            cout << "Give berhasil" << endl;
-        }
-        catch (BaseException* e2){
-            e2->printMessage();
+            catch (BaseException* e2){
+                e2->printMessage();
+            }
+        } else {
+            e1->printMessage();
         }
     }
 }

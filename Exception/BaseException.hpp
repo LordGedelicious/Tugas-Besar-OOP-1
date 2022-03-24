@@ -7,7 +7,11 @@ using namespace std;
 
 // ini masih disatuin dlu di satu file, nanti baru dipisah pisah
 class BaseException {
+protected: 
+    string expType;
 public:
+    BaseException();
+    string getExpType() const;
     virtual void printMessage() = 0;
 };
 
