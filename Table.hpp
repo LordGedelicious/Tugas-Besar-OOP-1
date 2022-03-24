@@ -419,7 +419,8 @@ class Table {
 
         void exportFile(string filename) {
             int ItemId, val;
-            ofstream outfile(filename);
+            string full = "Export\\" + filename;
+            ofstream outfile(full);
             for (int i = 0; i < maxrow; i++) {
                 for (int j = 0; j < maxcol; j++) {
                     if (this->item[i][j]->isEmpty()){ //cek slot kosong
