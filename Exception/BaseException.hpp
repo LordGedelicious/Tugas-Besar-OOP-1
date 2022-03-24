@@ -2,7 +2,7 @@
 #define __BASE_EXCEPTION_HPP__
 
 #include <iostream>
-#include "LibItem.hpp"
+#include "../LibItem.hpp"
 using namespace std;
 
 // ini masih disatuin dlu di satu file, nanti baru dipisah pisah

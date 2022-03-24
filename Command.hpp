@@ -9,6 +9,7 @@
 #include "Table.hpp"
 #include "Libitem.hpp"
 #include "LibRecipe.hpp"
+#include "Exception/BaseException.hpp"
 using namespace std;
 
 class Give{

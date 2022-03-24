@@ -51,18 +51,17 @@ void Give::Execute(Table <3,9> *inventory, libitem lib){
         inventory->give(nontool);
         cout << "Give berhasil" << endl;
     }
-    catch (string notFound){ //gataudah ini bener ato belom
-        cout << notFound << endl;
+    catch (BaseException* e1){ //gataudah ini bener ato belom
         try{
             Tool t = lib.searchtoolsbyname(this->name);
-            tool = new Tool(t.getid(), t.getname(), t.gettype(), 10);
             for (int i=0;i<this->qty;i++){
+                tool = new Tool(t.getid(), t.getname(), t.gettype(), 10);
                 inventory->give(tool);
             }
             cout << "Give berhasil" << endl;
         }
-        catch (string notFound){
-            cout << notFound << endl;
+        catch (BaseException* e2){
+            e2->printMessage();
         }
     }
 }
@@ -132,6 +131,7 @@ void Move::Execute(Table <3,9> *inventory, Table <3,3> *crafting){
 Use::Use(string InvID){
     this->InvID = InvID;
 }
+
 void Use::Execute(Table<3,9>* inventory){
     if (checkID(this->InvID)){
         inventory->useTool(getSlotID(InvID));
@@ -153,8 +153,8 @@ void Craft::Execute(Table <3,3> *crafting, Table <3,9> *inventory, RecipeList rL
         give.Execute(inventory, lib);
         crafting->clearAll();
     }
-    catch(string asdf){
-        cout << asdf << endl;
+    catch(BaseException* e){
+        e->printMessage();
     }
     cout << "Craft" << endl;
 }

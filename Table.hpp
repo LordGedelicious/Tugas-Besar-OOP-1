@@ -1,7 +1,7 @@
 #include "Item.hpp"
 #include "NonTool.hpp"
 #include "Tool.hpp"
-#include "BaseException.hpp"
+#include "Exception/BaseException.hpp"
 #include <math.h>
 #include <fstream>
 
@@ -138,6 +138,7 @@ class Table {
                         nt->substract(nt->getquantity());
                     }
                 } else {
+                    delete nt;
                     throw InventoryFullException();
                 }
             }
@@ -254,7 +255,7 @@ class Table {
                     throw NotEmptySlotException('C', idx2);
                 }
             } else {
-                throw EmptySlotException('C', idx);
+                throw EmptySlotException('C', idx2);
             }
         }
 
@@ -298,7 +299,7 @@ class Table {
 
             }
             else {
-                throw ItemInvalidException(item[i1][j1], item[i2][j2]->getid());
+                throw ItemInvalidException(item[i1][j1], item[i2][j2]);
             }
         }
 

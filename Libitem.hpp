@@ -1,3 +1,6 @@
+#ifndef LIBITEM_HPP_
+#define LIBITEM_HPP_
+
 #include <iostream>
 #include "Item.hpp"
 #include "Tool.hpp"
@@ -8,9 +11,6 @@
 #include <fstream>
 #include <string.h>
 using namespace std;
-
-#ifndef LIBITEM_HPP_
-#define LIBITEM_HPP_
 
 using namespace std;
 

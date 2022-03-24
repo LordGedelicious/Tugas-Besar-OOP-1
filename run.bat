@@ -1,3 +1,3 @@
-g++ -o main *.cpp -std=c++17
+g++ -o main *.cpp Exception/BaseException.cpp -std=c++17
 .\main
 pause
