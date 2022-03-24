@@ -46,6 +46,8 @@ class Recipe {
         void printRecipe();
         // Fungsi untuk cek apakah resep cocok
         bool checkRecipe(Table<3,3> *C);
+        // Fungsi untuk mirror resep thdp sumbu y
+        Recipe mirrorY();
 };
 
 #endif
