@@ -76,15 +76,8 @@ int main(){
             use.Execute(inventory);
         }
         else if (command == "CRAFT"){
-            try{
-                Recipe res = rList.checkCrafting(crafting);
-                res.printRecipe();
-            }   
-            catch(string asdf){
-                cout << asdf << endl;
-            }
-            //Craft craft;
-            //craft.Execute();
+            Craft craft;
+            craft.Execute(crafting, inventory, rList, lib);
         }
         else if (command == "EXPORT"){ //done
             cin >> fileName;

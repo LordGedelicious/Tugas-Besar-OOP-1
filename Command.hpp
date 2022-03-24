@@ -8,6 +8,7 @@
 #include <vector>
 #include "Table.hpp"
 #include "Libitem.hpp"
+#include "LibRecipe.hpp"
 using namespace std;
 
 class Give{
@@ -49,7 +50,7 @@ public:
 class Craft {
 public:
     Craft();
-    void Execute();
+    void Execute(Table <3,3> *crafting, Table <3,9> *inventory, RecipeList rList, libitem lib);
 };
 
 class Export {

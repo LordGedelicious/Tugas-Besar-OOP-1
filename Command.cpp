@@ -146,7 +146,16 @@ void Use::Execute(Table<3,9>* inventory){
 Craft::Craft(){    
 }
 
-void Craft::Execute(){
+void Craft::Execute(Table <3,3> *crafting, Table <3,9> *inventory, RecipeList rList, libitem lib){
+    try{
+        Recipe newRes = rList.checkCrafting(crafting);
+        Give give(newRes.getRecipeResult(), newRes.getResultQty());
+        give.Execute(inventory, lib);
+        crafting->clearAll();
+    }
+    catch(string asdf){
+        cout << asdf << endl;
+    }
     cout << "Craft" << endl;
 }
 
