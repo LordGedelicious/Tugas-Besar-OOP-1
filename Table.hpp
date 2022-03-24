@@ -1,6 +1,7 @@
 #include "Item.hpp"
 #include "NonTool.hpp"
 #include "Tool.hpp"
+#include "BaseException.hpp"
 #include <math.h>
 #include <fstream>
 
@@ -137,7 +138,7 @@ class Table {
                         nt->substract(nt->getquantity());
                     }
                 } else {
-                    // throw error
+                    throw InventoryFullException();
                 }
             }
             delete nt;
@@ -151,7 +152,7 @@ class Table {
                 this->item[x][y] = new Tool(t->getid(), t->getname(), t->gettype(), t->getdurability());
                 delete t;
             } else {
-                // throw error
+                throw InventoryFullException();
             }
         }
 
@@ -177,7 +178,7 @@ class Table {
             }
 
             if (this->item[i][j]->isEmpty()) {
-                // throw error
+                throw DiscardInvalidException(k);
             } else {
                 if (this->item[i][j]->getquantity() >= count) {
                     this->item[i][j]->substract(count);
@@ -186,7 +187,7 @@ class Table {
                         this->item[i][j] = new NonTool();
                     }
                 } else {
-                    // throw error
+                    throw DiscardInvalidException(k);
                 }
             }
         }
@@ -250,10 +251,10 @@ class Table {
                         this->item[i][j] = new NonTool();
                     }
                 } else {
-                    // throw error
+                    throw NotEmptySlotException('C', idx2);
                 }
             } else {
-                // throw error
+                throw EmptySlotException('C', idx);
             }
         }
 
@@ -290,15 +291,14 @@ class Table {
                     int moveq = max((64-q2), q1);
                     item[i1][j1]->substract(moveq);
                     item[i2][j2]->add(moveq);
-
                 }
                 else {
-                    //exception not a nontool
+                    throw NotNonToolException(item[i1][j1]);
                 }
 
             }
             else {
-                //exception tidak sama item
+                throw ItemInvalidException(item[i1][j1], item[i2][j2]->getid());
             }
         }
 
@@ -408,12 +408,10 @@ class Table {
                     delete this->item[i][j];
                     this->item[i][j] = new NonTool(); //NT or Item
                 }
-                
-
 
             }
             else {
-                //throw exception not a tool
+                throw NotNonToolException(item[i][j]);
             }
         }
 
