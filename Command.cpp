@@ -137,12 +137,16 @@ Use::Use(string InvID){
 }
 
 void Use::Execute(Table<3,9>* inventory){
-    if (checkID(this->InvID)){
-        inventory->useTool(getSlotID(InvID));
-        cout << "Item used" << endl;
-    }
-    else{
-        cout << "Masukan salah" << endl;
+    try {
+        if (checkID(this->InvID)){
+            inventory->useTool(getSlotID(InvID));
+            cout << "Item used" << endl;
+        }
+        else{
+            cout << "Masukan salah" << endl;
+        }
+    } catch (BaseException* e) {
+        e->printMessage();
     }
 }
 

@@ -379,7 +379,7 @@ class Table {
                     }
                 }
             } else {
-                // throw error
+                throw new EmptySlotException('I', idx1);
             }
         }
 
@@ -411,7 +411,7 @@ class Table {
 
             }
             else {
-                throw NotNonToolException(item[i][j]);
+                throw new NotToolException(item[i][j]);
             }
         }
 

@@ -47,6 +47,14 @@ class NotNonToolException : public BaseException {
         void printMessage() override;
 };
 
+class NotToolException : public BaseException {
+    private:
+        Item* falseItem;
+    public:
+        NotToolException(Item* failItem);
+        void printMessage() override;
+};
+
 class ItemInvalidException : public BaseException {
     private:
         Item* srcItem;

@@ -13,7 +13,7 @@ DiscardInvalidException::DiscardInvalidException(int slotID) {
 }
 
 void DiscardInvalidException::printMessage() {
-    cout << "Discard C" + slotID << " Fail";
+    cout << "Discard C" + slotID << " Fail" << endl;
 }
 
 InventoryFullException::InventoryFullException() {
@@ -38,9 +38,9 @@ ItemNotFoundException::ItemNotFoundException(int id) {
 
 void ItemNotFoundException::printMessage() {
     if (id == -999) {
-        cout << "Item " << name << " is not valid!";
+        cout << "Item " << name << " is not valid!" << endl;
     } else {
-        cout << "Item with id:" << id << "is not valid!";
+        cout << "Item with id:" << id << " is not valid!" << endl;
     }
 }
 
@@ -49,7 +49,15 @@ NotNonToolException::NotNonToolException(Item* failItem) {
 }
 
 void NotNonToolException::printMessage() {
-    cout << this->falseItem->getname() << "is not a nontool";
+    cout << this->falseItem->getname() << " is not a tool"<< endl;
+}
+
+NotToolException::NotToolException(Item* failItem) {
+    this->falseItem = failItem;
+}
+
+void NotToolException::printMessage() {
+    cout << this->falseItem->getname() << " is not a tool"<< endl;
 }
 
 ItemInvalidException::ItemInvalidException(Item* srcItem, Item* destItem ) {
@@ -68,9 +76,9 @@ NotEmptySlotException::NotEmptySlotException(int slotID, char type) {
 
 void NotEmptySlotException::printMessage() {
     if (type == 'I') {
-        cout << "Slot I" + slotID << "is not empty.";
+        cout << "Slot I" + slotID << "is not empty."<< endl;
     } else if (type == 'C') {
-        cout << "Slot C" + slotID << "is not empty.";
+        cout << "Slot C" + slotID << "is not empty."<< endl;
     }
 }
 
@@ -81,8 +89,8 @@ EmptySlotException::EmptySlotException(int slotID, char type) {
 
 void EmptySlotException::printMessage() {
     if (type == 'I') {
-        cout << "Slot I" + slotID << "is empty.";
+        cout << "Slot I" + slotID << "is empty."<< endl;
     } else if (type == 'C') {
-        cout << "Slot C" + slotID << "is empty.";
+        cout << "Slot C" + slotID << "is empty."<< endl;
     }
 }
