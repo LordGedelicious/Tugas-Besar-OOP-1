@@ -22,7 +22,7 @@ bool checkCraftId(string CrafID){ //validasi ID crafting
     if (ID[0] != 'C'){
         return false;
     }
-    if (index < 0 || index > 9){
+    if (index < 0 || index > 8){
         return false;
     }
     return true;
@@ -77,12 +77,18 @@ Discard::Discard(string InvId, int qty){
 }
 
 void Discard::Execute(Table <3,9> *inventory){
-    if (checkID(this->InvId)){
-        inventory->discard(getSlotID(this->InvId),this->qty);
-        cout << "Discard berhasil" << endl;
-    }
-    else{
-        cout << "Masukan salah" << endl;
+    try {
+        if (checkID(this->InvId)){
+            
+            inventory->discard(getSlotID(this->InvId),this->qty);
+            cout << "Discard berhasil" << endl;
+
+        }
+        else{
+            cout << "Masukan salah" << endl;
+        }
+    } catch (BaseException* e) {
+        e->printMessage();
     }
 }
 
@@ -96,38 +102,42 @@ Move::Move(string src, int N, vector<string> dest){
 void Move::Execute(Table <3,9> *inventory, Table <3,3> *crafting){
     char src = this->src[0];
     char dest = this->dest[0][0];
-
-    if (src == 'I' && dest == 'I'){ //stack
-        if (checkID(this->src) && checkID(this->dest[0])){
-            inventory->stackNonTool(getSlotID(this->src),getSlotID(this->dest[0]));
-            cout << "Stack berhasil" << endl;
-        }
-        else{
-            cout << "Masukan salah" << endl;
-        }
-    }
-    else if(src == 'I' && dest == 'C'){
-        if (checkID(this->src) && checkCraftId(this->dest[0])){
-            for (int i=0;i<this->N;i++){
-                inventory->moveToCraft(getSlotID(this->src), getSlotID(this->dest[i]), crafting);
+    try {
+        if (src == 'I' && dest == 'I'){ //stack
+            if (checkID(this->src) && checkID(this->dest[0])){
+                inventory->stackNonTool(getSlotID(this->src),getSlotID(this->dest[0]));
+                cout << "Stack berhasil" << endl;
             }
-            cout << "Move inventory to craft" << endl;
+            else{
+                cout << "Masukan salah" << endl;
+            }
+        }
+        else if(src == 'I' && dest == 'C'){
+            if (checkID(this->src) && checkCraftId(this->dest[0])){
+                for (int i=0;i<this->N;i++){
+                    inventory->moveToCraft(getSlotID(this->src), getSlotID(this->dest[i]), crafting);
+                }
+                cout << "Move inventory to craft" << endl;
+            }
+            else{
+                cout << "Masukan salah" << endl;
+            }
+        }
+        else if(src == 'C' && dest == 'I'){ //move from craft to ivnen
+            if (checkCraftId(this->src) && checkID(this->dest[0])){
+                crafting->moveToInventory(getSlotID(this->src), getSlotID(this->dest[0]), inventory);
+                cout << "Move craft to inventory" << endl;
+            }
+            else{
+                cout << "Masukan salah" << endl;
+            }
         }
         else{
-            cout << "Masukan salah" << endl;
+            cout << "masukan salah" << endl;
         }
     }
-    else if(src == 'C' && dest == 'I'){ //move from craft to ivnen
-        if (checkCraftId(this->src) && checkID(this->dest[0])){
-            crafting->moveToInventory(getSlotID(this->src), getSlotID(this->dest[0]), inventory);
-            cout << "Move craft to inventory" << endl;
-        }
-        else{
-            cout << "Masukan salah" << endl;
-        }
-    }
-    else{
-        cout << "masukan salah" << endl;
+    catch (BaseException* e) {
+        e->printMessage();
     }
 }
 

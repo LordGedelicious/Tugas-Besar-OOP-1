@@ -260,42 +260,23 @@ class Table {
 
         void stackNonTool(int sID1, int sID2)  // COMMAND 5
         {
-            bool flag1 = false;
-            bool flag2 = false;
-            int i = 0;
-            int j = 0;
-            int k = 0;
-            int i1, j1, i2, j2;
-
-            while (i < maxrow && (!flag1 || !flag2)) {
-                j = 0;
-                while (j < maxrow && (!flag1 || !flag2)) {
-                    if (sID1 == k) {
-                        flag1 = true;
-                        i1 = i;
-                        j1 = j;
-                    }
-                    if (sID2 == k) {
-                        flag2 = true;
-                        i2 = i;
-                        j2 = j;
-                    }
-                    k++;
-                }
-            }
+            int i1,i2,j1,j2;
+            i1 = sID1/9;
+            j1 = sID1%9;
+            i2 = sID2/9;
+            j2 = sID2%9;
 
             if (item[i1][j1]->getid() == item[i2][j2]->getid()) {
-                if (item[i1][i2]->isNonTool()) {
+                if (item[i1][j1]->isNonTool()) {
                     int q1 = item[i1][j1]->getquantity();
                     int q2 = item[i2][j2]->getquantity();
-                    int moveq = max((64-q2), q1);
+                    int moveq = min((64-q2), q1);
                     item[i1][j1]->substract(moveq);
                     item[i2][j2]->add(moveq);
                 }
                 else {
                     throw new NotNonToolException(item[i1][j1]);
                 }
-
             }
             else {
                 throw new ItemInvalidException(item[i1][j1], item[i2][j2]);
