@@ -67,7 +67,7 @@ void Recipe::printRecipe(){
     }
 }
 
-bool Recipe::checkRecipe(Table<3,3> C) {
+bool Recipe::checkRecipe(Table<3,3> *C) {
     int i=0;
     int j=0;
     bool found = false;
@@ -88,8 +88,8 @@ bool Recipe::checkRecipe(Table<3,3> C) {
             while (same && a<(this->getRowSize())) {
                 b = 0;
                 while (same && b<(this->getColSize())) {
-                    CraftItemName = C.getItem(i+a, j+b)->getname();
-                    CraftItemType = C.getItem(i+a, j+b)->gettype();
+                    CraftItemName = C->getItem(i+a, j+b)->getname();
+                    CraftItemType = C->getItem(i+a, j+b)->gettype();
                     RecipeItem = getIngredientByLocation(a, b);
                     if (RecipeItem.compare("PLANK") == 0 || RecipeItem.compare("LOG") || RecipeItem.compare("STONE")) {
                         // is a type

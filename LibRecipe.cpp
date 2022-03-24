@@ -24,13 +24,15 @@ void RecipeList::addRecipes(const Recipe newRecipe) {
     this->List.push_back(newRecipe);
 }
 
-// Recipe RecipeList::checkCrafting(Table<3,3> C) {
-//     for (int i=0; i<currentSize; i++) {
-//         if (this->List[i].checkRecipe(C)) {
-//             return this->List[i];
-//         }
-//     }
-// }
+Recipe RecipeList::checkCrafting(Table<3,3>* C) {
+    for (int i=0; i<this->List.size(); i++) {
+        if (this->List[i].checkRecipe(C)) {
+            return this->List[i];
+        }
+    }
+    string lempar = "Astaga";
+    throw lempar;
+}
 
 vector<filesystem::path> RecipeList::getFilesinFolder(string folder){
     vector<filesystem::path> files;

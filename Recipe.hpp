@@ -45,7 +45,7 @@ class Recipe {
         // Fungsi printer isi Recipe
         void printRecipe();
         // Fungsi untuk cek apakah resep cocok
-        bool checkRecipe(Table<3,3> C);
+        bool checkRecipe(Table<3,3> *C);
 };
 
 #endif

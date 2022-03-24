@@ -31,7 +31,7 @@ class RecipeList : public Recipe {
         // Fungsi untuk mengisi RecipeList
         void addRecipes(const Recipe newRecipe);
         // Fungsi untuk mendapatkan resep yang cocok untuk crafting
-        //Recipe checkCrafting(Table<3,3> C);
+        Recipe checkCrafting(Table<3,3> *C);
         void readRecipeFile (string folder);
         vector<filesystem::path> getFilesinFolder (string folder);
         vector<string> splitString(string full);
