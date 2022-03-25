@@ -1,5 +1,5 @@
 # Tugas Besar 1 IF2210 Pemrograman Berorientasi Objek
-Dibuat oleh:
+Dibuat oleh: <br>
 Kelompok 7: Monangisbeneran
 | Nama | NIM |
 | ---- | ------ |
