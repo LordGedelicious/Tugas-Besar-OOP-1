@@ -172,28 +172,12 @@ class Table {
         /* Implementasi Command DISCARD
         Menghapus NonTool sejumlah count pada id yang dipilih */
         void discard(int id, int count) {
-            int k = 0;
-            int i = 0;
-            int j = 0;
-            while (i < maxrow && k != id) {
-                j = 0;
-                while (j < maxcol && k != id) {
-                    j++;
-                    k++;
-                }
-                
-                if (k != id) {
-                    i++;
-                } else {
-                    if (j == maxcol) {
-                        j = 0;
-                        i++;
-                    }
-                }
-            }
+            int i, j;
+            i = id / maxcol;
+            j = id % maxcol;
 
             if (this->item[i][j]->isEmpty()) {
-                throw new DiscardInvalidException(k);
+                throw new DiscardInvalidException(id);
             } else {
                 if (this->item[i][j]->getquantity() >= count) {
                     this->item[i][j]->substract(count);
@@ -202,7 +186,7 @@ class Table {
                         this->item[i][j] = new NonTool();
                     }
                 } else {
-                    throw new DiscardInvalidException(k);
+                    throw new DiscardInvalidException(id);
                 }
             }
         }
@@ -210,45 +194,11 @@ class Table {
         /* Implementasi Command MOVE
         Berfungsi memindahkan pointer item dari tabel inventory ke tabel craft */
         void moveToCraft(int ID1, int ID2, Table<3, 3> *craft) {
-            int idx1 = 0;
-            int i = 0;
-            int j = 0;
-            while (i < maxrow && idx1 != ID1) {
-                j = 0;
-                while (j < maxcol && idx1 != ID1) {
-                    j++;
-                    idx1++;
-                }
-                
-                if (idx1 != ID1) {
-                    i++;
-                } else {
-                    if (j == maxcol) {
-                        j = 0;
-                        i++;
-                    }
-                }
-            }
-
-            int idx2 = 0;
-            int k = 0;
-            int l = 0;
-            while (k < 3 && idx2 != ID2) {
-                l = 0;
-                while (l < 3 && idx2 != ID2) {
-                    l++;
-                    idx2++;
-                }
-                
-                if (idx2 != ID2) {
-                    k++;
-                } else {
-                    if (l == 3) {
-                        l = 0;
-                        k++;
-                    }
-                }
-            }
+            int i, j, k, l;
+            i = ID1 / maxcol;
+            j = ID1 % maxcol;
+            k = ID2 / 3;
+            l = ID2 % 3;
 
             if (!this->item[i][j]->isEmpty()) {
                 if (craft->getItem(k,l)->isEmpty()) {
@@ -268,10 +218,10 @@ class Table {
                         this->item[i][j] = new NonTool();
                     }
                 } else {
-                    throw new NotEmptySlotException('C', idx2);
+                    throw new NotEmptySlotException('C', ID2);
                 }
             } else {
-                throw new EmptySlotException('I', idx1);
+                throw new EmptySlotException('I', ID1);
             }
         }
 
@@ -279,11 +229,11 @@ class Table {
         Berfungsi menggabungkan dua NonTool yang sama */
         void stackNonTool(int sID1, int sID2)
         {
-            int i1,i2,j1,j2;
-            i1 = sID1/9;
-            j1 = sID1%9;
-            i2 = sID2/9;
-            j2 = sID2%9;
+            int i1, i2, j1, j2;
+            i1 = sID1 / maxcol;
+            j1 = sID1 % maxcol;
+            i2 = sID2 / maxcol;
+            j2 = sID2 % maxcol;
 
             if (!item[i2][j2]->isEmpty()) {
                 if (item[i1][j1]->getid() == item[i2][j2]->getid()) {
@@ -314,45 +264,11 @@ class Table {
         /* Implementasi Command MOVE
         Berfungsi memindahkan pointer item dari tabel craft ke tabel inventory */
         void moveToInventory(int ID1, int ID2, Table<3, 9> *inventory) {
-            int idx1 = 0;
-            int i = 0;
-            int j = 0;
-            while (i < maxrow && idx1 != ID1) {
-                j = 0;
-                while (j < maxcol && idx1 != ID1) {
-                    j++;
-                    idx1++;
-                }
-                
-                if (idx1 != ID1) {
-                    i++;
-                } else {
-                    if (j == maxcol) {
-                        j = 0;
-                        i++;
-                    }
-                }
-            }
-
-            int idx2 = 0;
-            int k = 0;
-            int l = 0;
-            while (k < 3 && idx2 != ID2) {
-                l = 0;
-                while (l < 9 && idx2 != ID2) {
-                    l++;
-                    idx2++;
-                }
-                
-                if (idx2 != ID2) {
-                    k++;
-                } else {
-                    if (l == 9) {
-                        l = 0;
-                        k++;
-                    }
-                }
-            }
+            int i, j, k, l;
+            i = ID1 / maxcol;
+            j = ID1 % maxcol;
+            k = ID2 / 9;
+            l = ID2 % 9;
 
             if (!this->item[i][j]->isEmpty()) {
                 if (this->item[i][j]->isNonTool()) {
@@ -363,7 +279,7 @@ class Table {
                         inventory->setItem(nt, k, l);
                     } else {
                         if (inventory->getItem(k,l)->isFull()) {
-                            throw new NotEmptySlotException('C',idx2);
+                            throw new NotEmptySlotException('C', ID2);
                         } else {
                             if (inventory->getItem(k,l)->getid() == this->item[i][j]->getid()) {
                                 this->item[i][j]->substract(1);
@@ -390,7 +306,7 @@ class Table {
                     }
                 }
             } else {
-                throw new EmptySlotException('I', idx1);
+                throw new EmptySlotException('I', ID1);
             }
         }
 
@@ -398,20 +314,9 @@ class Table {
         Berfungsi menggunakan Tool */
         void useTool(int slotID) // COMMAND 7
         {
-            int k = 0;
-            int i = 0;
-            int j = 0;
-            while (i < maxrow && k != slotID) {
-                j = 0;
-                while (j < maxcol && k != slotID) {
-                    j++;
-                    k++;
-                }
-                
-                if (k != slotID) {
-                    i++;
-                }
-            }
+            int i, j;
+            i = slotID / maxcol;
+            j = slotID % maxcol;
 
             // IF FOUND
             if (this->item[i][j]->isTool()) {
