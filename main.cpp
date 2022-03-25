@@ -18,43 +18,26 @@ int main(){
     Table <3,9> *inventory = new Table<3,9>();
 
     libitem lib;
-    lib.readFile("item.txt");
+    lib.readFile("./config/item.txt");
 
     RecipeList rList;
-    rList.readRecipeFile("Recipe");
-
-    // Give give("BIRCH_PLANK", 10);
-    // Give give2("STICK", 10);
-    // give.Execute(inventory, lib);
-    // give2.Execute(inventory, lib);
-
-    // dest.push_back("C0");
-    // dest.push_back("C1");
-    // dest.push_back("C2");
-    // Move move("I0",3,dest);
-    // move.Execute(inventory,crafting);
-
-    
-
-    // crafting->show("C");
-    // cout << endl;
-    // inventory->show("I");
+    rList.readRecipeFile("./config/Recipe");
 
     cout << "Uji coba" << endl;
     while (true){
         cin >> command;
-        if (command == "SHOW"){ //done
+        if (command == "SHOW"){
             crafting->show("C");
             cout << endl;
             inventory->show("I");
         }
-        else if (command == "GIVE"){ //done
+        else if (command == "GIVE"){
             cin >> itemName;
             cin >> itemQty;
             Give give(itemName, itemQty);
             give.Execute(inventory, lib);
         }
-        else if (command == "DISCARD"){//done
+        else if (command == "DISCARD"){
             cin >> InvID;
             cin >> itemQty;
             Discard discard(InvID, itemQty);
@@ -71,7 +54,7 @@ int main(){
             move.Execute(inventory,crafting);
             dest.clear();
         }
-        else if (command == "USE"){//add exception handling
+        else if (command == "USE"){
             cin >> InvID;
             Use use(InvID);
             use.Execute(inventory);
@@ -80,7 +63,7 @@ int main(){
             Craft craft;
             craft.Execute(crafting, inventory, rList, lib);
         }
-        else if (command == "EXPORT"){ //done
+        else if (command == "EXPORT"){
             cin >> fileName;
             Export exp(fileName);
             exp.Execute(inventory);
@@ -91,5 +74,6 @@ int main(){
         else{
             cout << "Command Invalid" << endl;
         }
+        cout << endl;
     }
 };

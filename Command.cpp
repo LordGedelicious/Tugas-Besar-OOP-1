@@ -49,9 +49,9 @@ void Give::Execute(Table <3,9> *inventory, libitem lib){
         NonTool nt = lib.searchnontoolsbyname(this->name);
         nontool = new NonTool(nt.getid(), nt.getname(), nt.gettype(), this->qty);
         inventory->give(nontool);
-        cout << "Give berhasil" << endl;
+        printMessage();
     }
-    catch (BaseException* e1){ //gataudah ini bener ato belom
+    catch (BaseException* e1){
         if (e1->getExpType() == "ItemNF") {
             try{
                 Tool t = lib.searchtoolsbyname(this->name);
@@ -59,7 +59,7 @@ void Give::Execute(Table <3,9> *inventory, libitem lib){
                     tool = new Tool(t.getid(), t.getname(), t.gettype(), 10);
                     inventory->give(tool);
                 }
-                cout << "Give berhasil" << endl;
+                printMessage();
             }
             catch (BaseException* e2){
                 e2->printMessage();
@@ -68,6 +68,10 @@ void Give::Execute(Table <3,9> *inventory, libitem lib){
             e1->printMessage();
         }
     }
+}
+
+void Give::printMessage(){
+    cout << this->name << " berhasil diberikan" << endl;
 }
 
 //Discard
@@ -81,7 +85,7 @@ void Discard::Execute(Table <3,9> *inventory){
         if (checkID(this->InvId)){
             
             inventory->discard(getSlotID(this->InvId),this->qty);
-            cout << "Discard berhasil" << endl;
+            printMessage();
 
         }
         else{
@@ -91,6 +95,10 @@ void Discard::Execute(Table <3,9> *inventory){
         e->printMessage();
     }
 }
+
+void Discard::printMessage(){
+    cout << "Barang berhasil dibuang" << endl;
+};
 
 //Move
 Move::Move(string src, int N, vector<string> dest){
@@ -106,7 +114,7 @@ void Move::Execute(Table <3,9> *inventory, Table <3,3> *crafting){
         if (src == 'I' && dest == 'I'){ //stack
             if (checkID(this->src) && checkID(this->dest[0])){
                 inventory->stackNonTool(getSlotID(this->src),getSlotID(this->dest[0]));
-                cout << "Stack berhasil" << endl;
+                printMessage();
             }
             else{
                 cout << "Masukan salah" << endl;
@@ -117,7 +125,7 @@ void Move::Execute(Table <3,9> *inventory, Table <3,3> *crafting){
                 for (int i=0;i<this->N;i++){
                     inventory->moveToCraft(getSlotID(this->src), getSlotID(this->dest[i]), crafting);
                 }
-                cout << "Move inventory to craft" << endl;
+                printMessage();
             }
             else{
                 cout << "Masukan salah" << endl;
@@ -126,18 +134,33 @@ void Move::Execute(Table <3,9> *inventory, Table <3,3> *crafting){
         else if(src == 'C' && dest == 'I'){ //move from craft to ivnen
             if (checkCraftId(this->src) && checkID(this->dest[0])){
                 crafting->moveToInventory(getSlotID(this->src), getSlotID(this->dest[0]), inventory);
-                cout << "Move craft to inventory" << endl;
+                printMessage();
             }
             else{
                 cout << "Masukan salah" << endl;
             }
         }
         else{
-            cout << "masukan salah" << endl;
+            cout << "Masukan salah" << endl;
         }
     }
     catch (BaseException* e) {
         e->printMessage();
+    }
+}
+
+void Move::printMessage(){
+    char src = this->src[0];
+    char dest = this->dest[0][0];
+    
+    if (src == 'I' && dest == 'I'){
+        cout << "Barang berhasil ditumpuk" << endl;
+    }
+    else if(src == 'I' && dest == 'C'){
+        cout << "Barang berhasil dipindahkan ke slot crafting" << endl;
+    }
+    else if(src == 'C' && dest == 'I'){
+        cout << "Barang berhasil dipindahkan ke inventory" << endl;
     }
 }
 
@@ -150,7 +173,7 @@ void Use::Execute(Table<3,9>* inventory){
     try {
         if (checkID(this->InvID)){
             inventory->useTool(getSlotID(InvID));
-            cout << "Item used" << endl;
+            printMessage();
         }
         else{
             cout << "Masukan salah" << endl;
@@ -158,6 +181,10 @@ void Use::Execute(Table<3,9>* inventory){
     } catch (BaseException* e) {
         e->printMessage();
     }
+}
+
+void Use::printMessage(){
+    cout << "Tool berhasil digunakan" << endl;
 }
 
 //Craft
@@ -174,15 +201,21 @@ void Craft::Execute(Table <3,3> *crafting, Table <3,9> *inventory, RecipeList rL
             inventory->give(tool);
         }
         else{
-            Give give(newRes.getRecipeResult(), newRes.getResultQty());
-            give.Execute(inventory, lib);
+            NonTool* nontool;
+            Tool nt = lib.searchtoolsbyname(newRes.getRecipeResult());
+            nontool = new NonTool(nt.getid(), nt.getname(), nt.gettype(), newRes.getResultQty());
+            inventory->give(nontool);
         }
         crafting->clearAll();
+        printMessage();
     }
     catch(BaseException* e){
         e->printMessage();
     }
-    cout << "Craft" << endl;
+}
+
+void Craft::printMessage(){
+    cout << "Crafting berhasil" << endl;
 }
 
 //Export
@@ -202,9 +235,13 @@ void Export::Execute(Table<3,9>* inventory){
     int row, col, val, ItemId;
     if (checkFilename()){
         inventory->exportFile(fileName);
-        cout << "Export berhasil" << endl;
+        printMessage();
     }
     else{
         cout << "Masukan nama file salah" << endl;
     }
+}
+
+void Export::printMessage(){
+    cout << "Export berhasil" << endl;
 }

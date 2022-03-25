@@ -82,29 +82,3 @@ void libitem::readFile(string fileName){
         }
     }
 }
-
-// Buat ngetest aja
-// int main() {
-//     libitem li;
-//     li.addItem(1,"wood", "plank", "NONTOOL");
-//     li.addItem(2,"oak", "plank", "NONTOOL");
-//     li.addItem(3,"wooden_sword", "-", "TOOL");
-//     li.printlibitem();
-//     try {
-//         string search = "wood";
-//         NonTool i = li.searchnontoolsbyname(search);
-//         cout << i.getname() << endl;
-//     } catch (BaseException* e) {
-//         ItemNotFoundException* e_out = (ItemNotFoundException*)e; 
-//         e_out->printMessage();
-//     }
-//     try {
-//         string search = "anjay";
-//         NonTool i = li.searchnontoolsbyname(search);
-//         cout << i.getname();
-//     } catch (BaseException* e) {
-//         ItemNotFoundException* e_out = (ItemNotFoundException*)e; 
-//         e_out->printMessage();
-//     }
-//     return 0;
-// }

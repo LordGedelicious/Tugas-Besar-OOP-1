@@ -5,7 +5,7 @@ SRC = $(wildcard *.cpp Exception/BaseException.cpp)
 .SILENT = all
 
 all:
-	$(CC) -o (target) $(SRC) && echo Build Success.
+	$(CC) -o $(TARGET) $(SRC) && echo Build Success.
 
 clean:
 	rm $(TARGET)

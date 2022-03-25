@@ -17,17 +17,9 @@
 class RecipeList : public Recipe {
     private:
         vector<Recipe> List;
-        //int currentSize;
-        //const int maxSize = 100;
     public:
         // default constructor, isinya 0
         RecipeList();
-        // cctor
-        //RecipeList(const RecipeList &other);
-        // dtor
-        //~RecipeList();
-        // Fungsi getter
-        //Recipe getRecipe(int index) const;
         // Fungsi untuk mengisi RecipeList
         void addRecipes(const Recipe newRecipe);
         // Fungsi untuk mendapatkan resep yang cocok untuk crafting
