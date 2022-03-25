@@ -69,7 +69,7 @@ class NotEmptySlotException : public BaseException {
         int slotID;
         char type;
     public:
-        NotEmptySlotException(int slotID, char type);
+        NotEmptySlotException(char type, int slotID);
         void printMessage() override;
 };
 
@@ -78,7 +78,7 @@ class EmptySlotException : public BaseException {
         int slotID;
         char type;
     public:
-        EmptySlotException(int slotID, char type);
+        EmptySlotException(char type, int slotID);
         void printMessage() override;
 };
 

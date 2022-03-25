@@ -103,7 +103,7 @@ vector<string> RecipeList::splitString(string full){
     return words;
 }
 
-void RecipeList::readRecipeFile (string folder){
+void RecipeList::operator<<(const string& folder){
     string str;
     vector<string> ingredients;
     vector<filesystem::path> files = getFilesinFolder(folder);

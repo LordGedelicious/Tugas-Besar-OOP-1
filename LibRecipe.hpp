@@ -25,7 +25,7 @@ class RecipeList : public Recipe {
         // Fungsi untuk mendapatkan resep yang cocok untuk crafting
         bool checkPurePairTool(Table<3,3> *C);
         Recipe checkCrafting(Table<3,3> *C);
-        void readRecipeFile (string folder);
+        void operator<<(const string& folder); //baca file
         vector<filesystem::path> getFilesinFolder (string folder);
         vector<string> splitString(string full);
         void showAll();
