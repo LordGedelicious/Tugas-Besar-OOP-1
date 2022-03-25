@@ -1,0 +1,16 @@
+D:\ITB\Tubes\Tubes2Stima\CppCLR_WinFormsProjecttest\CppCLR_WinFormsProjecttest\x64\Debug\CppCLR_WinFormsProjecttest.vcxproj.AssemblyReference.cache
+D:\ITB\Tubes\Tubes2Stima\CppCLR_WinFormsProjecttest\CppCLR_WinFormsProjecttest\x64\Debug\CppCLR_WinFormsProjecttest.vcxproj.SuggestedBindingRedirects.cache
+D:\ITB\Tubes\Tubes2Stima\CppCLR_WinFormsProjecttest\CppCLR_WinFormsProjecttest\x64\Debug\CppCLR_WinFormsProjecttest.Form1.resources
+D:\ITB\Tubes\Tubes2Stima\CppCLR_WinFormsProjecttest\CppCLR_WinFormsProjecttest\x64\Debug\CppCLR_WinFormsProjecttest.vcxproj.GenerateResource.cache
+D:\ITB\Tubes\Tubes2Stima\GUI_Craft\CppCLR_WinFormsProjecttest\x64\Debug\CppCLR_WinFormsProjecttest.vcxproj.AssemblyReference.cache
+D:\ITB\Tubes\Tubes2Stima\GUI_Craft\CppCLR_WinFormsProjecttest\x64\Debug\CppCLR_WinFormsProjecttest.vcxproj.SuggestedBindingRedirects.cache
+D:\ITB\Tubes\Tubes2Stima\GUI_Craft\CppCLR_WinFormsProjecttest\x64\Debug\CppCLR_WinFormsProjecttest.Form1.resources
+D:\ITB\Tubes\Tubes2Stima\GUI_Craft\CppCLR_WinFormsProjecttest\x64\Debug\CppCLR_WinFormsProjecttest.vcxproj.GenerateResource.cache
+D:\ITB\Tubes\Tubes2Stima\GUI_Craft\GUI_Craft\x64\Debug\CppCLR_WinFormsProjecttest.vcxproj.AssemblyReference.cache
+D:\ITB\Tubes\Tubes2Stima\GUI_Craft\GUI_Craft\x64\Debug\CppCLR_WinFormsProjecttest.vcxproj.SuggestedBindingRedirects.cache
+D:\ITB\Tubes\Tubes2Stima\GUI_Craft\GUI_Craft\x64\Debug\CppCLR_WinFormsProjecttest.Form1.resources
+D:\ITB\Tubes\Tubes2Stima\GUI_Craft\GUI_Craft\x64\Debug\CppCLR_WinFormsProjecttest.vcxproj.GenerateResource.cache
+D:\ITB\Tubes\Tubes1PBO\Tugas-Besar-OOP-1\GUI_Craft\GUI_Craft\x64\Debug\CppCLR_WinFormsProjecttest.vcxproj.AssemblyReference.cache
+D:\ITB\Tubes\Tubes1PBO\Tugas-Besar-OOP-1\GUI_Craft\GUI_Craft\x64\Debug\CppCLR_WinFormsProjecttest.vcxproj.SuggestedBindingRedirects.cache
+D:\ITB\Tubes\Tubes1PBO\Tugas-Besar-OOP-1\GUI_Craft\GUI_Craft\x64\Debug\CppCLR_WinFormsProjecttest.Form1.resources
+D:\ITB\Tubes\Tubes1PBO\Tugas-Besar-OOP-1\GUI_Craft\GUI_Craft\x64\Debug\CppCLR_WinFormsProjecttest.vcxproj.GenerateResource.cache
