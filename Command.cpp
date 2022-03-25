@@ -217,7 +217,7 @@ void Craft::Execute(Table <3,3> *crafting, Table <3,9> *inventory, RecipeList rL
             } catch (BaseException *e1) {
                 Tool* tool;
                 Tool t = lib.searchtoolsbyname(newRes.getRecipeResult());
-                tool = new Tool(t.getid(), t.getname(), t.gettype(), newRes.getResultQty());
+                tool = new Tool(t.getid(), t.getname(), t.gettype(), 10);
                 inventory->give(tool);
             }
         }
