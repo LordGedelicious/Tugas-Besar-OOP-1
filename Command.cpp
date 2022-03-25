@@ -202,7 +202,7 @@ void Craft::Execute(Table <3,3> *crafting, Table <3,9> *inventory, RecipeList rL
         }
         else{
             NonTool* nontool;
-            Tool nt = lib.searchtoolsbyname(newRes.getRecipeResult());
+            NonTool nt = lib.searchnontoolsbyname(newRes.getRecipeResult());
             nontool = new NonTool(nt.getid(), nt.getname(), nt.gettype(), newRes.getResultQty());
             inventory->give(nontool);
         }
