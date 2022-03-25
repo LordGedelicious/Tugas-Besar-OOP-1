@@ -26,7 +26,7 @@ class libitem {
     Tool searchtoolsbyname(string name) const;
     Tool searchtoolsbyid(int id) const;
     void printlibitem();
-    void readFile(string fileName);
+    void operator<<(const string& fileName); //baca file
 };
 
 #endif

@@ -69,7 +69,7 @@ Tool libitem::searchtoolsbyid(int id) const{
     throw new ItemNotFoundException(id);
 }
 
-void libitem::readFile(string fileName){
+void libitem::operator<<(const string& fileName){
     int id;
     string name;
     string type;

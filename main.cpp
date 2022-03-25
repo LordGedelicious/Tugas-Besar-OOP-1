@@ -18,10 +18,12 @@ int main(){
     Table <3,9> *inventory = new Table<3,9>();
 
     libitem lib;
-    lib.readFile("./config/item.txt");
+    string item = "./config/item.txt";
+    lib << item;
 
     RecipeList rList;
-    rList.readRecipeFile("./config/Recipe");
+    string recipe = "./config/Recipe";
+    rList << recipe;
 
     cout << "Uji coba" << endl;
     while (true){
