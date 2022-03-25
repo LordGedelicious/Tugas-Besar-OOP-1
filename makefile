@@ -1,11 +1,26 @@
-CC = g++ -std=c++17
-TARGET = main.exe
-SRC = $(wildcard *.cpp Exception/BaseException.cpp)
+TC_FOLDER = tests
+EXT_IN = in
+EXT_OUT = out
+EXT_ANS = ans
+EXECUTABLE_FILENAME = main
+ALL_SRCS := $(wildcard *.cpp Exception/BaseException.cpp)
+SRCS     := $(filter-out check.cpp, $(ALL_SRCS))
 
-.SILENT = all
+all: compile test check
 
-all:
-	$(CC) -o $(TARGET) $(SRC) && echo Build Success.
+# Compile all cpp files except check.cpp
+compile:
+	g++ -std=c++17 -o $(EXECUTABLE_FILENAME) $(SRCS)
 
-clean:
-	rm $(TARGET)
+# Test
+test: $(TC_FOLDER)/*.$(EXT_IN) $(EXECUTABLE_FILENAME)
+	for inputfile in $(TC_FOLDER)/*.$(EXT_IN); do \
+		./$(EXECUTABLE_FILENAME) < $$inputfile; \
+	done;
+
+# Check
+check: FORCE check.cpp
+	g++ -std=c++17 -o check check.cpp
+	./check
+
+FORCE: ;
