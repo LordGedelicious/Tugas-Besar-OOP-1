@@ -26,9 +26,7 @@ class Recipe {
         const int maxRowSize = 3;
         const int maxColumnSize = 3;
     public:
-        // by default cuma diisi sama rowSize sama columnSize, diisinya make fungsi lain
         Recipe();
-        //Recipe(int rowSize, int colSize);
         // Fungsi getter dan setter (basic)
         void setRecipeResult(string newResult);
         string getRecipeResult() const;

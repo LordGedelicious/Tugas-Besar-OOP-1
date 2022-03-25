@@ -23,7 +23,7 @@ private:
     string name;
 public:
     Give(string name, int qty);
-    void Execute(Table <3,9> *inventory, libitem lib);
+    void Execute(Table <3,9> *inventory, libitem lib); //Eksekusi command give
     void printMessage();
 };
 
@@ -33,7 +33,7 @@ private:
     string InvId;
 public:
     Discard(string InvId, int qty);
-    void Execute(Table <3,9> *inventory);
+    void Execute(Table <3,9> *inventory); //Eksekusi command discard
     void printMessage();
 };
 
@@ -44,7 +44,7 @@ private:
     vector<string> dest;
 public:
     Move(string src, int N, vector<string> dest);
-    void Execute(Table <3,9> *inventory, Table <3,3> *crafting);
+    void Execute(Table <3,9> *inventory, Table <3,3> *crafting); //Eksekusi command move
     void printMessage();
 };
 
@@ -53,14 +53,14 @@ private:
     string InvID;
 public:
     Use(string InvID);
-    void Execute(Table<3,9>* inventory);
+    void Execute(Table<3,9>* inventory);//Eksekusi command use
     void printMessage();
 };
 
 class Craft : public Command{
 public:
     Craft();
-    void Execute(Table <3,3> *crafting, Table <3,9> *inventory, RecipeList rList, libitem lib);
+    void Execute(Table <3,3> *crafting, Table <3,9> *inventory, RecipeList rList, libitem lib); //Eksekusi command craft
     void printMessage();
 };
 
@@ -70,8 +70,8 @@ private:
     Table<3,9> inventory;
 public:
     Export(string fileName);
-    bool checkFilename();
-    void Execute(Table<3,9>* inventory);
+    bool checkFilename(); //periksa apakah input file valid
+    void Execute(Table<3,9>* inventory); //Eksekusi command export
     void printMessage();
 };
 

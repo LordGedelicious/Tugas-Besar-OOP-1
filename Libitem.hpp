@@ -20,11 +20,17 @@ class libitem {
     vector<NonTool> nontools;
     public:
     libitem();
+    //Tambahkan item ke library item
     void addItem(int ID, string name, string type, string category);
+    //Cari nontool di library dengan nama
     NonTool searchnontoolsbyname(string name) const;
+    //Cari nontool di library dengan id
     NonTool searchnontoolsbyid(int id) const;
+    //Cari tool di library dengan nama
     Tool searchtoolsbyname(string name) const;
+    //Cari tool di library dengan id
     Tool searchtoolsbyid(int id) const;
+    //cetak library item
     void printlibitem();
     void operator<<(const string& fileName); //baca file
 };

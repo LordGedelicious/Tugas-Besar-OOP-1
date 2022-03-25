@@ -22,12 +22,16 @@ class RecipeList {
         RecipeList();
         // Fungsi untuk mengisi RecipeList
         void addRecipes(const Recipe newRecipe);
-        // Fungsi untuk mendapatkan resep yang cocok untuk crafting
+        //cek apakah crafting berisi 2 tool yang sejenis
         bool checkPurePairTool(Table<3,3> *C);
+        //cek apakah crafting bisa dilakukan
         Recipe checkCrafting(Table<3,3> *C);
         void operator<<(const string& folder); //baca file
+        //fungsi untuk mendapatkan file di suatu folder
         vector<filesystem::path> getFilesinFolder (string folder);
+        //pisahkan string yang dipisahkan dengan spasi
         vector<string> splitString(string full);
+        //tampilkan semua resep
         void showAll();
 };
 
