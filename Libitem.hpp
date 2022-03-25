@@ -16,8 +16,8 @@ using namespace std;
 
 class libitem {
     private:
-    vector<Item> tools;
-    vector<Item> nontools;
+    vector<Tool> tools;
+    vector<NonTool> nontools;
     public:
     libitem();
     void addItem(int ID, string name, string type, string category);

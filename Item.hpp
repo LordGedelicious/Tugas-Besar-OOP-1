@@ -22,8 +22,8 @@ class Item {
         virtual int getdurability();
         virtual void add(int _quantity);
         virtual void substract(int _quantity);
-        virtual bool isFull();
-        virtual bool isEmpty();
+        virtual bool isFull() = 0;
+        virtual bool isEmpty() = 0;
         bool isTool();
         bool isNonTool();
 };

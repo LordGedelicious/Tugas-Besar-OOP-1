@@ -40,14 +40,6 @@ void Item::substract(int _quantity) {
     //
 }
 
-bool Item::isFull() {
-    return true;
-}
-
-bool Item::isEmpty() {
-    return true;
-}
-
 bool Item::isTool() {
     return this->category == 'T';
 }

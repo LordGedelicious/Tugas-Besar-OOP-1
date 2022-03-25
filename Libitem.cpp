@@ -6,11 +6,11 @@ libitem::libitem() {
 }
 void libitem::addItem(int ID, string name, string type, string category) {
     if (category.compare("TOOL") == 0) {
-        Item newitem(ID, name, type, 'T');
+        Tool newitem(ID, name, type, 10);
         tools.push_back(newitem);
     }
     else if (category.compare("NONTOOL") == 0) {
-        Item newitem(ID, name, type, 'N');
+        NonTool newitem(ID, name, type, 0);
         nontools.push_back(newitem);
     }
 }
@@ -34,7 +34,6 @@ NonTool libitem::searchnontoolsbyname(string name) const{
             return nt;
         }
     }
-
     throw new ItemNotFoundException(name);
 }
 
