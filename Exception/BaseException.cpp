@@ -69,29 +69,29 @@ void ItemInvalidException::printMessage() {
     cout << this->srcItem->getname() << " is not same as " << this->destItem->getname() << endl;
 }
 
-NotEmptySlotException::NotEmptySlotException(int slotID, char type) {
+NotEmptySlotException::NotEmptySlotException(char type, int slotID) {
     this->slotID = slotID;
     this->type = type;
 }
 
 void NotEmptySlotException::printMessage() {
     if (type == 'I') {
-        cout << "Slot I" + slotID << "is not empty."<< endl;
+        cout << "Slot I" << slotID << " is not empty."<< endl;
     } else if (type == 'C') {
-        cout << "Slot C" + slotID << "is not empty."<< endl;
+        cout << "Slot C" << slotID << " is not empty."<< endl;
     }
 }
 
-EmptySlotException::EmptySlotException(int slotID, char type) {
+EmptySlotException::EmptySlotException(char type, int slotID) {
     this->slotID = slotID;
     this->type = type;
 }
 
 void EmptySlotException::printMessage() {
     if (type == 'I') {
-        cout << "Slot I" + slotID << "is empty."<< endl;
+        cout << "Slot I" << slotID << " is empty."<< endl;
     } else if (type == 'C') {
-        cout << "Slot C" + slotID << "is empty."<< endl;
+        cout << "Slot C" << slotID << " is empty."<< endl;
     }
 }
 

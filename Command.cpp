@@ -121,11 +121,19 @@ void Move::Execute(Table <3,9> *inventory, Table <3,3> *crafting){
             }
         }
         else if(src == 'I' && dest == 'C'){
+            bool success = false;
             if (checkID(this->src) && checkCraftId(this->dest[0])){
                 for (int i=0;i<this->N;i++){
-                    inventory->moveToCraft(getSlotID(this->src), getSlotID(this->dest[i]), crafting);
+                    try {
+                        inventory->moveToCraft(getSlotID(this->src), getSlotID(this->dest[i]), crafting);
+                        success = true;
+                    } catch (BaseException *e1) {
+                        e1->printMessage();
+                    }
                 }
-                printMessage();
+                if (success) {
+                    printMessage();
+                }
             }
             else{
                 cout << "Masukan salah" << endl;
