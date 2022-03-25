@@ -13,6 +13,7 @@ class Table {
     private:
         Item*** item;
     public:
+        // Table constructor
         Table() {
             this->item = new Item**[maxrow];
             for (int i = 0; i < maxrow; i++) {
@@ -23,10 +24,12 @@ class Table {
             }
         }
 
+        // Table destructor
         ~Table() {
             delete[] item;
         }
 
+        // Mengembalikan index dari kolom tabel yang kosong
         int getEmptyCol(int row) {
             int j = 0;
             while (j < maxcol && !this->item[row][j]->isEmpty()) {
@@ -35,6 +38,7 @@ class Table {
             return j;
         }
 
+        // Mengembalikan index dari baris tabel yang kosong
         int getEmptyRow() {
             int i = 0;
             while (i < maxrow && this->getEmptyCol(i) == maxcol) {
@@ -43,14 +47,17 @@ class Table {
             return i;
         }
 
+        // Mengembalikan pointer Item pada baris ke-i dan kolom ke-j
         Item* getItem(int i, int j) {
             return this->item[i][j];
         }
 
+        // Mengubah value pointer Item pada baris ke-i dan kolom ke-j
         void setItem(Item *item, int i, int j) {
             this->item[i][j] = item;
         }
 
+        // Menghapus seluruh isi tabel
         void clearAll() {
             for (int i = 0; i < maxrow; i++) {
                 for (int j = 0; j < maxcol; j++) {
@@ -62,6 +69,8 @@ class Table {
             }
         }
 
+        /*Implementasi Command SHOW
+        Berfungsi menampilkan tabel */
         void show(string id) {
             int k = 0;
             for (int i = 0; i < maxrow; i++) {
@@ -93,6 +102,8 @@ class Table {
             }
         }
 
+        /* Implementasi Command GIVE
+        Menambahkan NonTool ke tabel */
         void give(NonTool *nt) {
             int x, y, quantity, i, j;
             bool flag = false;
@@ -144,6 +155,8 @@ class Table {
             delete nt;
         }
 
+        /* Implementasi Command CRAFT
+        Menambahkan Tool ke tabel setelah crafting */
         void give(Tool *t) {
             int x = getEmptyRow();
             if (x != maxrow) {
@@ -156,6 +169,8 @@ class Table {
             }
         }
 
+        /* Implementasi Command DISCARD
+        Menghapus NonTool sejumlah count pada id yang dipilih */
         void discard(int id, int count) {
             int k = 0;
             int i = 0;
@@ -192,6 +207,8 @@ class Table {
             }
         }
 
+        /* Implementasi Command MOVE
+        Berfungsi memindahkan pointer item dari tabel inventory ke tabel craft */
         void moveToCraft(int ID1, int ID2, Table<3, 3> *craft) {
             int idx1 = 0;
             int i = 0;
@@ -258,7 +275,9 @@ class Table {
             }
         }
 
-        void stackNonTool(int sID1, int sID2)  // COMMAND 5
+        /* Implementasi Command MOVE
+        Berfungsi menggabungkan dua NonTool yang sama */
+        void stackNonTool(int sID1, int sID2)
         {
             int i1,i2,j1,j2;
             i1 = sID1/9;
@@ -283,6 +302,8 @@ class Table {
             }
         }
 
+        /* Implementasi Command MOVE
+        Berfungsi memindahkan pointer item dari tabel craft ke tabel inventory */
         void moveToInventory(int ID1, int ID2, Table<3, 9> *inventory) {
             int idx1 = 0;
             int i = 0;
@@ -364,6 +385,8 @@ class Table {
             }
         }
 
+        /* Implementasi Command USE
+        Berfungsi menggunakan Tool */
         void useTool(int slotID) // COMMAND 7
         {
             int k = 0;
@@ -396,6 +419,8 @@ class Table {
             }
         }
 
+        /* Implementasi Command Export
+        Berfungsi melakukan export dari inventory ke dalam file */
         void exportFile(string filename) {
             int ItemId, val;
             string full = "Export\\" + filename;
