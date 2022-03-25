@@ -5,7 +5,7 @@
 #include "Item.hpp"
 #include "Tool.hpp"
 #include "NonTool.hpp"
-#include "Exception/BaseException.hpp"
+#include "BaseException.hpp"
 #include <vector>
 #include <iostream>
 #include <fstream>

@@ -9,7 +9,7 @@
 #include "Table.hpp"
 #include "Libitem.hpp"
 #include "LibRecipe.hpp"
-#include "Exception/BaseException.hpp"
+#include "BaseException.hpp"
 using namespace std;
 
 class Command{

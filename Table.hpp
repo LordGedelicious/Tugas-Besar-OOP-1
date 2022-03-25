@@ -1,7 +1,7 @@
 #include "Item.hpp"
 #include "NonTool.hpp"
 #include "Tool.hpp"
-#include "Exception/BaseException.hpp"
+#include "BaseException.hpp"
 #include <math.h>
 #include <fstream>
 
