@@ -14,7 +14,7 @@
 #ifndef _LIBRECIPE_HPP_
 #define _LIBRECIPE_HPP_
 
-class RecipeList : public Recipe {
+class RecipeList {
     private:
         vector<Recipe> List;
     public:
