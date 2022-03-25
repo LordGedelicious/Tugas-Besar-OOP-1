@@ -25,8 +25,8 @@ int main(){
     string recipe = "./config/Recipe";
     rList << recipe;
 
-    cout << "Uji coba" << endl;
-    while (true){
+    bool running = true;
+    while (running){
         cin >> command;
         if (command == "SHOW"){
             crafting->show("C");
@@ -68,7 +68,12 @@ int main(){
         else if (command == "EXPORT"){
             cin >> fileName;
             Export exp(fileName);
-            exp.Execute(inventory);
+            try {
+                exp.Execute(inventory);
+                running = false;
+            } catch (const char* err) {
+                cout << err << endl;
+            }
         }
         else if (command == "EXIT"){
             break;
