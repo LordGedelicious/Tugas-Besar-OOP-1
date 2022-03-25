@@ -1026,7 +1026,7 @@ private: System::Windows::Forms::Label^ I1;
 			this->Carft->Name = L"Carft";
 			this->Carft->Size = System::Drawing::Size(75, 23);
 			this->Carft->TabIndex = 22;
-			this->Carft->Text = L"Carft";
+			this->Carft->Text = L"Craft";
 			this->Carft->UseVisualStyleBackColor = true;
 			this->Carft->Click += gcnew System::EventHandler(this, &Form1::Carft_Click);
 			// 
