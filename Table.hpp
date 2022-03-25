@@ -423,8 +423,7 @@ class Table {
         Berfungsi melakukan export dari inventory ke dalam file */
         void exportFile(string filename) {
             int ItemId, val;
-            string full = "Export\\" + filename;
-            ofstream outfile(full);
+            ofstream outfile(filename);
             for (int i = 0; i < maxrow; i++) {
                 for (int j = 0; j < maxcol; j++) {
                     if (this->item[i][j]->isEmpty()){ //cek slot kosong

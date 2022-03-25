@@ -232,7 +232,7 @@ Export::Export(string fileName){
 }
 
 bool Export::checkFilename(){
-    regex b("(.*)(.txt)");
+    regex b("(.*)");
     if (!regex_match(this->fileName,b)){
         return false;
     }
