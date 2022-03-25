@@ -1,22 +1,2 @@
 ﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(514,5): warning MSB8028: The intermediate directory (x64\Debug\) contains files shared from another project (CppCLR_WinFormsProjecttest.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  pch.cpp
-  AssemblyInfo.cpp
-  BaseException.cpp
-  Command.cpp
-D:\ITB\Tubes\Tubes1PBO\Tugas-Besar-OOP-1\GUI_Craft\GUI_Craft\Command.cpp(219,35): warning C4101: 'e1': unreferenced local variable
-D:\ITB\Tubes\Tubes1PBO\Tugas-Besar-OOP-1\GUI_Craft\GUI_Craft\Command.cpp(252,19): warning C4101: 'val': unreferenced local variable
-D:\ITB\Tubes\Tubes1PBO\Tugas-Besar-OOP-1\GUI_Craft\GUI_Craft\Command.cpp(252,9): warning C4101: 'row': unreferenced local variable
-D:\ITB\Tubes\Tubes1PBO\Tugas-Besar-OOP-1\GUI_Craft\GUI_Craft\Command.cpp(252,24): warning C4101: 'ItemId': unreferenced local variable
-D:\ITB\Tubes\Tubes1PBO\Tugas-Besar-OOP-1\GUI_Craft\GUI_Craft\Command.cpp(252,14): warning C4101: 'col': unreferenced local variable
-  CppCLR_WinFormsProject.cpp
-  Form1.cpp
-  Item.cpp
-  Libitem.cpp
-  LibRecipe.cpp
-  NonTool.cpp
-  Recipe.cpp
-  Tool.cpp
-  Generating Code...
-  .NETFramework,Version=v4.7.2.AssemblyAttributes.cpp
-  AssemblyInfo.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
   CppCLR_WinFormsProjecttest.vcxproj -> D:\ITB\Tubes\Tubes1PBO\Tugas-Besar-OOP-1\GUI_Craft\x64\Debug\GUI_Craft.exe
