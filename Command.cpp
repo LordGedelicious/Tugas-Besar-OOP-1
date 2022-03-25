@@ -209,10 +209,17 @@ void Craft::Execute(Table <3,3> *crafting, Table <3,9> *inventory, RecipeList rL
             inventory->give(tool);
         }
         else{
-            NonTool* nontool;
-            NonTool nt = lib.searchnontoolsbyname(newRes.getRecipeResult());
-            nontool = new NonTool(nt.getid(), nt.getname(), nt.gettype(), newRes.getResultQty());
-            inventory->give(nontool);
+            try {
+                NonTool* nontool;
+                NonTool nt = lib.searchnontoolsbyname(newRes.getRecipeResult());
+                nontool = new NonTool(nt.getid(), nt.getname(), nt.gettype(), newRes.getResultQty());
+                inventory->give(nontool);
+            } catch (BaseException *e1) {
+                Tool* tool;
+                Tool t = lib.searchtoolsbyname(newRes.getRecipeResult());
+                tool = new Tool(t.getid(), t.getname(), t.gettype(), newRes.getResultQty());
+                inventory->give(tool);
+            }
         }
         crafting->clearAll();
         printMessage();
