@@ -5,7 +5,6 @@
 #include "LibItem.hpp"
 using namespace std;
 
-// ini masih disatuin dlu di satu file, nanti baru dipisah pisah
 class BaseException {
 protected: 
     string expType;
