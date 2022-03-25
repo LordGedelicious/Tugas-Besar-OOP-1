@@ -1,5 +1,6 @@
 # Tugas Besar 1 IF2210 Pemrograman Berorientasi Objek
 Dibuat oleh:
+Kelompok 7: Monangisbeneran
 | Nama | NIM |
 | ---- | ------ |
 | Gede Prasidha Bhawarnawa | 13520004 |
