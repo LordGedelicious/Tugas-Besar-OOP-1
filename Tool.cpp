@@ -12,6 +12,10 @@ int Tool::getdurability() {
     return this->durability;
 }
 
+bool Tool::isFull() {
+    return true;
+}
+
 bool Tool::isEmpty() {
     return (this->durability == 0); 
 }

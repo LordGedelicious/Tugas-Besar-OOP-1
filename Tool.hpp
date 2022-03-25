@@ -10,6 +10,7 @@ class Tool : public Item {
         Tool();
         Tool(int id, string name, string type, int durability);
         int getdurability();
+        bool isFull();
         bool isEmpty();
         void use();
         bool isDestroyed();
