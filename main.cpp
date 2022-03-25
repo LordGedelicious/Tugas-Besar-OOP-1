@@ -68,8 +68,12 @@ int main(){
         else if (command == "EXPORT"){
             cin >> fileName;
             Export exp(fileName);
-            exp.Execute(inventory);
-            running = false;
+            try {
+                exp.Execute(inventory);
+                running = false;
+            } catch (const char* err) {
+                cout << err << endl;
+            }
         }
         else if (command == "EXIT"){
             break;

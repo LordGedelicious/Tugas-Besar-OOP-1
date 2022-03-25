@@ -249,7 +249,7 @@ void Export::Execute(Table<3,9>* inventory){
         printMessage();
     }
     else{
-        cout << "Masukan nama file salah" << endl;
+        throw "Masukan nama file salah";
     }
 }
 
