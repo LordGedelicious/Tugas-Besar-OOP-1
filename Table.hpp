@@ -285,20 +285,29 @@ class Table {
             i2 = sID2/9;
             j2 = sID2%9;
 
-            if (item[i1][j1]->getid() == item[i2][j2]->getid()) {
-                if (item[i1][j1]->isNonTool()) {
-                    int q1 = item[i1][j1]->getquantity();
-                    int q2 = item[i2][j2]->getquantity();
-                    int moveq = min((64-q2), q1);
-                    item[i1][j1]->substract(moveq);
-                    item[i2][j2]->add(moveq);
+            if (!item[i2][j2]->isEmpty()) {
+                if (item[i1][j1]->getid() == item[i2][j2]->getid()) {
+                    if (item[i1][j1]->isNonTool()) {
+                        int q1 = item[i1][j1]->getquantity();
+                        int q2 = item[i2][j2]->getquantity();
+                        int moveq = min((64-q2), q1);
+                        item[i1][j1]->substract(moveq);
+                        item[i2][j2]->add(moveq);
+                    }
+                    else {
+                        throw new NotNonToolException(item[i1][j1]);
+                    }
                 }
                 else {
+                    throw new ItemInvalidException(item[i1][j1], item[i2][j2]);
+                }
+            } else {
+                if (item[i1][j1]->isNonTool()) {
+                    item[i2][j2] = new NonTool(item[i1][j1]->getid(), item[i1][j1]->getname(), item[i1][j1]->gettype(), item[i1][j1]->getquantity());
+                    delete item[i1][j1];
+                } else {
                     throw new NotNonToolException(item[i1][j1]);
                 }
-            }
-            else {
-                throw new ItemInvalidException(item[i1][j1], item[i2][j2]);
             }
         }
 
