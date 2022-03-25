@@ -20,3 +20,13 @@ Clone repository ini lalu pada directory hasil clone jalankan perintah berikut:
 >make
 >main.exe
 ```
+
+## Cara Menggunakan GUI
+GUI dibuat menggunakan visual studio 2022. 
+Sebelum menjalankan GUI, install extension c++/CLR Windows Forms for Visual Studio 2022.
+
+Langkah:<br />
+    1. Clone repository ini <br />
+    2. Buka folder GUI_Craft dan jalankan GUI_Craft.sln<br />
+    3. Lakukan start without debugging<br />
+    4. GUI akan berjalan, masukkan command pada text box yang tersedia dengan format yang sama dengan command pada CLI

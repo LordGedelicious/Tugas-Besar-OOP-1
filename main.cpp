@@ -70,7 +70,6 @@ int main(){
             Export exp(fileName);
             try {
                 exp.Execute(inventory);
-                running = false;
             } catch (const char* err) {
                 cout << err << endl;
             }

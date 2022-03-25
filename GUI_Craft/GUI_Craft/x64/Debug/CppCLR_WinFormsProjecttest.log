@@ -1,2 +1,6 @@
 ﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(514,5): warning MSB8028: The intermediate directory (x64\Debug\) contains files shared from another project (CppCLR_WinFormsProjecttest.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  CppCLR_WinFormsProject.cpp
+  Form1.cpp
+  Generating Code...
+  AssemblyInfo.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
   CppCLR_WinFormsProjecttest.vcxproj -> D:\ITB\Tubes\Tubes1PBO\Tugas-Besar-OOP-1\GUI_Craft\x64\Debug\GUI_Craft.exe
