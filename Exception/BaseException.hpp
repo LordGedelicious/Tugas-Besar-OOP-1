@@ -81,4 +81,10 @@ class EmptySlotException : public BaseException {
         EmptySlotException(int slotID, char type);
         void printMessage() override;
 };
+
+class CraftingInvalidException : public BaseException {
+    public:
+        CraftingInvalidException();
+        void printMessage() override;
+};
 #endif

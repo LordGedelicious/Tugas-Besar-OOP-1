@@ -94,3 +94,11 @@ void EmptySlotException::printMessage() {
         cout << "Slot C" + slotID << "is empty."<< endl;
     }
 }
+
+CraftingInvalidException::CraftingInvalidException() {
+
+}
+
+void CraftingInvalidException::printMessage() {
+    cout << "Crafting failed." << endl;
+}

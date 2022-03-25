@@ -79,7 +79,7 @@ Recipe RecipeList::checkCrafting(Table<3,3>* C) {
         }
     }
 
-    //throw exception
+    throw new CraftingInvalidException();
 }
 
 vector<filesystem::path> RecipeList::getFilesinFolder(string folder){
